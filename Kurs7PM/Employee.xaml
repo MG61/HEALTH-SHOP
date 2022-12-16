@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Kurs7PM" WindowState="Maximized"
+        xmlns:local="clr-namespace:Kurs7PM" 
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="1100" AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
@@ -19,28 +19,23 @@
                 <LinearGradientBrush>
                     <!--<GradientStop Color="ForestGreen" Offset="0.0"/>-->
                     <GradientStop Color="#0e1c26" Offset="1.0"/>
-                    <GradientStop Color="#2a454b" Offset="0.0"/>
                     <GradientStop Color="#294861" Offset="0.0"/>
                 </LinearGradientBrush>
                 <!--Градиент-->
             </Border.Background>
+            
         </Border>
-        <Button Content="Печать" Margin="188,560,853,51.6" FontFamily="Britannic Bold" Click="Print"/>
-        <Button Content="П50-1-19" Margin="36,369,977,231.6"  Click="П50_1_19"/>
-        <Button Content="П50-2-19" Margin="173,369,840,231.6" Click="П50_2_19"/>
-        <Button Content="П50-3-19" Margin="310,369,703,231.6" Click="П50_3_19"/>
-        <Button Content="П50-4-19" Margin="36,449,977,151.6"  Click="П50_4_19"/>
-        <Button Content="П50-5-19" Margin="173,449,840,151.6" Click="П50_5_19"/>
-        <Button Content="П50-6-19" Margin="310,448,703,151.6" Click="П50_6_19"/>
-        <ComboBox Margin="35,172,703,439.6" Name="group"/>
         <DataGrid x:Name="data" FontWeight="Bold" FontSize="15" VerticalContentAlignment="Center" Margin="432,38,10,9.6"  BorderBrush="Black" BorderThickness="2"/>
         <Button Content="Добавить" HorizontalAlignment="Left" Margin="23,531,0,0" VerticalAlignment="Top" Width="160" Click="DOB_sotr_Login" Height="38" FontFamily="Britannic Bold"/>
         <Button Content="Изменить" HorizontalAlignment="Left" Margin="23,584,0,0" VerticalAlignment="Top" Width="160" Click="UPDATE_sotr_Login" Height="38" FontFamily="Britannic Bold"/>
         <Button Content="Удалить" HorizontalAlignment="Left" Margin="252,531,0,0" VerticalAlignment="Top" Width="160" Click="DELETE_sotr_Login" Height="38" FontFamily="Britannic Bold"/>
         <Button Content="Выход"  Margin="252,584,0,0"   Click="EXIT_2" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160" Height="38" RenderTransformOrigin="0.5,0.5" FontFamily="Britannic Bold"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Название организации" Name="nam" GotFocus="got1" PreviewTextInput="nam_PreviewTextInput" LostFocus="los1"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="ФИО студента" Name="fio" GotFocus="got2" PreviewTextInput="adre_PreviewTextInput" LostFocus="los2"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,245,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Руководитель от техникума" x:Name="ruktech" GotFocus="got3" PreviewTextInput="ruktech_PreviewTextInput" LostFocus="los3" />
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Руководитель от компании" x:Name="rukorg" GotFocus="got4" PreviewTextInput="rukorg_PreviewTextInput" LostFocus="los4"/>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Логин" x:Name="login"/>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Пароль" x:Name="password"/>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Фамилия" Name="surname"/>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Имя" Name="name"/>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Отчество" x:Name="middle_name"/>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,359,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Номер телефона" x:Name="number"/>
+        <ComboBox Margin="37,420,703,192" Style = "{StaticResource Combobox_Base}" Text="dadwdwad"/>
     </Grid>
 </Window>

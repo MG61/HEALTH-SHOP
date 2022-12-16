@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Kurs7PM" WindowState="Maximized"
+        xmlns:local="clr-namespace:Kurs7PM" 
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="1100" AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
@@ -19,7 +19,6 @@
                 <LinearGradientBrush>
                     <!--<GradientStop Color="ForestGreen" Offset="0.0"/>-->
                     <GradientStop Color="#0e1c26" Offset="1.0"/>
-                    <GradientStop Color="#2a454b" Offset="0.0"/>
                     <GradientStop Color="#294861" Offset="0.0"/>
                 </LinearGradientBrush>
                 <!--Градиент-->
@@ -27,9 +26,9 @@
         </Border>
         <TextBlock Text="АВТОРИЗАЦИЯ" FontWeight="Bold" FontSize="36" TextAlignment="Center" VerticalAlignment="Top" Margin="252,77,206,0" FontFamily="Britannic Bold" Foreground="White"/>
         <TextBlock  Text="ЛОГИН:" FontWeight="Bold" FontSize="30" TextAlignment="Center" VerticalAlignment="Center" Margin="164,235,805,371.6" Foreground="White" Height="43" FontFamily="Britannic Bold"/>
-        <TextBox Name="LOG" PreviewTextInput="log_PreviewTextInput" Background="White" FontWeight="Bold" FontSize="30" TextAlignment="Center" VerticalContentAlignment="Center" Margin="312,213,230,356.6" BorderBrush="White" BorderThickness="2" Foreground="SkyBlue" FontFamily="Britannic Bold"/>
+        <TextBox Name="LOG" PreviewTextInput="log_PreviewTextInput" Background="White" FontWeight="Bold" FontSize="30" TextAlignment="Center" VerticalContentAlignment="Center" Margin="312,213,230,356.6" BorderBrush="White" BorderThickness="2"  FontFamily="Britannic Bold"/>
         <TextBlock  Text="ПАРОЛЬ:" FontWeight="Bold" FontSize="30" TextAlignment="Center" VerticalAlignment="Top" Margin="126,327,788,0" Foreground="White" Height="43" FontFamily="Britannic Bold"/>
-        <TextBox Name="PASS" PreviewTextInput="pass_PreviewTextInput" FontWeight="Bold" FontSize="30" TextAlignment="Center" VerticalContentAlignment="Center" Margin="312,308,230,261.6" Background="White" Foreground="SkyBlue" FontFamily="Britannic Bold"></TextBox>
+        <TextBox Name="PASS" PreviewTextInput="pass_PreviewTextInput" FontWeight="Bold" FontSize="30" TextAlignment="Center" VerticalContentAlignment="Center" Margin="312,308,230,261.6" Background="White"  FontFamily="Britannic Bold"></TextBox>
         <Button
                         Content="ВОЙТИ"
                         Click="Voyti_Click"

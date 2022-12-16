@@ -23,5 +23,32 @@ namespace Kurs7PM
         {
             InitializeComponent();
         }
+
+        private void DOB_sotr_Login(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UPDATE_sotr_Login(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DELETE_sotr_Login(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EXIT_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Print(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
+
 }
