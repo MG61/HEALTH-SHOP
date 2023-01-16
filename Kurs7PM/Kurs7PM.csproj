@@ -70,6 +70,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Medication.xaml.cs">
+      <DependentUpon>Medication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Order.xaml.cs">
+      <DependentUpon>Order.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pharmacy.xaml.cs">
+      <DependentUpon>Pharmacy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Provider.xaml.cs">
+      <DependentUpon>Provider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Recipe.xaml.cs">
+      <DependentUpon>Recipe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sklad.xaml.cs">
+      <DependentUpon>Sklad.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Check.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Employee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,6 +115,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Check.xaml.cs">
+      <DependentUpon>Check.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Employee.xaml.cs">
       <DependentUpon>Employee.xaml</DependentUpon>
     </Compile>
@@ -98,6 +130,30 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Medication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Order.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pharmacy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Provider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Recipe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sklad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -148,5 +204,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,11 +1,11 @@
-﻿<Window x:Class="Kurs7PM.Employee"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window x:Class="Kurs7PM.Client"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kurs7PM" 
         mc:Ignorable="d"
-        Title="Сотрудник" Height="650" Width="1100" AllowsTransparency="True" Background="Transparent"
+        Title="Склад" Height="650" Width="1100" AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
 
@@ -23,19 +23,18 @@
                 </LinearGradientBrush>
                 <!--Градиент-->
             </Border.Background>
-            
+
         </Border>
         <DataGrid x:Name="data" FontWeight="Bold" FontSize="15" VerticalContentAlignment="Center" Margin="432,38,10,9.6"  BorderBrush="Black" BorderThickness="2"/>
         <Button Content="Добавить" HorizontalAlignment="Left" Margin="23,531,0,0" VerticalAlignment="Top" Width="160" Click="DOB_sotr_Login" Height="38" FontFamily="Britannic Bold"/>
         <Button Content="Изменить" HorizontalAlignment="Left" Margin="23,584,0,0" VerticalAlignment="Top" Width="160" Click="UPDATE_sotr_Login" Height="38" FontFamily="Britannic Bold"/>
         <Button Content="Удалить" HorizontalAlignment="Left" Margin="252,531,0,0" VerticalAlignment="Top" Width="160" Click="DELETE_sotr_Login" Height="38" FontFamily="Britannic Bold"/>
         <Button Content="Выход"  Margin="252,584,0,0"   Click="EXIT_2" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160" Height="38" RenderTransformOrigin="0.5,0.5" FontFamily="Britannic Bold"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Логин" x:Name="login"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Пароль" x:Name="password"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Фамилия" Name="surname"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Имя" Name="name"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Отчество" x:Name="middle_name"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="35,359,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Номер телефона" x:Name="number"/>
-        <ComboBox Margin="37,420,703,192" Style = "{StaticResource Combobox_Base}" Text="Продавец"/>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="37,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Фамилия" x:Name="login"/>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="37,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Имя" x:Name="password"/>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="37,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Отчество" Name="surname"/>
+        <ComboBox Margin="37,361,703,251" Style = "{StaticResource Combobox_Base}" Text="Код рецепта"></ComboBox>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="36,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Логин" x:Name="login_Copy"/>
+        <TextBox HorizontalAlignment="Left" Height="38" Margin="36,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontFamily="Britannic Bold" FontSize="15" TextAlignment="Center" Text="Пароль" x:Name="password_Copy"/>
     </Grid>
 </Window>
