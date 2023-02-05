@@ -76,6 +76,9 @@
     <Compile Include="Medication.xaml.cs">
       <DependentUpon>Medication.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuAdministrator.xaml.cs">
+      <DependentUpon>MenuAdministrator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Order.xaml.cs">
       <DependentUpon>Order.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Medication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuAdministrator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

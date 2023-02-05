@@ -5,31 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kurs7PM"
         mc:Ignorable="d"
-        Title="Чек" Height="450" Width="800">
+        Title="Чек" Height="650" Width="1100" AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid.Resources>
-        <!--DataTemplate for Published Date column defined in Grid.Resources.  PublishDate is a property on the ItemsSource of type DateTime -->
+        <Border Name="BorderLog" CornerRadius="10" Visibility="Visible" BorderThickness="0,7,0,0" Padding="1,0,0,0" Margin="0,0,-0.4,0">
+            <!--Для закругления краёв-->
+            <Border.Background>
+                <LinearGradientBrush>
+                    <!--<GradientStop Color="ForestGreen" Offset="0.0"/>-->
+                    <GradientStop Color="#0e1c26" Offset="1.0"/>
+                    <GradientStop Color="#294861" Offset="0.0"/>
+                </LinearGradientBrush>
+                <!--Градиент-->
+            </Border.Background>
+        </Border>
+        
+    <!--<Grid.Resources>
+        --><!--DataTemplate for Published Date column defined in Grid.Resources.  PublishDate is a property on the ItemsSource of type DateTime --><!--
         <DataTemplate x:Key="DateTemplate" >
             <StackPanel Width="100" Height="30">
-                <Border Background="LightBlue" BorderBrush="Black" BorderThickness="1">
-                    <TextBlock Text="Добавить в корзину"  FontSize="8" HorizontalAlignment="Center" />
-                </Border>
-
-            </StackPanel>
+                    <Border Background="LightBlue" BorderBrush="Black" BorderThickness="1">
+                        <TextBlock Text="Добавить в корзину"  FontSize="8" HorizontalAlignment="Center" />
+                    </Border>
+                </StackPanel>
         </DataTemplate>
-        <!--DataTemplate for the Published Date column when in edit mode. -->
+        --><!--DataTemplate for the Published Date column when in edit mode. --><!--
         <DataTemplate x:Key="EditingDateTemplate">
                 <Button Content="" Command="" Click="Dob_korz"/>
-                <!--<DatePicker SelectedDate="{Binding PublishDate}"  />-->
+                --><!--<DatePicker SelectedDate="{Binding PublishDate}"  />--><!--
         </DataTemplate>
-    </Grid.Resources>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="170,0,0,0" >
-            <DataGrid.Columns>
-                <!--Custom colum55n that shows the published date-->
-                <DataGridTemplateColumn Header="Publish Date" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}" />
-            </DataGrid.Columns>
-        </DataGrid>
+    </Grid.Resources>-->
 
+        <DataGrid x:Name="data" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="432,38,10,9.6" BorderBrush="Black" BorderThickness="2" VerticalContentAlignment="Center" >
+            <!--<DataGrid.Columns>
+                <DataGridTemplateColumn Header="Publish Date" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}" />
+            </DataGrid.Columns>-->
+        </DataGrid>
+        
     </Grid>
-    
+
 </Window>

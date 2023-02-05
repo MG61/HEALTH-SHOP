@@ -11,24 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Drawing;
-
 
 namespace Kurs7PM
 {
     /// <summary>
-    /// Логика взаимодействия для Check.xaml
+    /// Логика взаимодействия для MenuAdministrator.xaml
     /// </summary>
-    public partial class Check : Window
+    public partial class MenuAdministrator : Window
     {
-        public Check()
+        public MenuAdministrator()
         {
             InitializeComponent();
-        }
-
-        private void Dob_korz(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

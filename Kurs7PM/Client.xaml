@@ -23,7 +23,6 @@
                 </LinearGradientBrush>
                 <!--Градиент-->
             </Border.Background>
-
         </Border>
         <DataGrid x:Name="data" FontWeight="Bold" FontSize="15" VerticalContentAlignment="Center" Margin="432,38,10,9.6"  BorderBrush="Black" BorderThickness="2"/>
         <Button Content="Добавить" HorizontalAlignment="Left" Margin="23,531,0,0" VerticalAlignment="Top" Width="160" Click="DOB_sotr_Login" Height="38" FontFamily="Britannic Bold"/>
