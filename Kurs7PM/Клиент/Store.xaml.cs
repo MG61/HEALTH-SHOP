@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,23 +23,52 @@ namespace Kurs7PM.Клиент
     /// </summary>
     public partial class Store : Window
     {
-       Kurs7DataSet DataSet = new Kurs7DataSet();
-       medicationTableAdapter MTA = new medicationTableAdapter();
+        Kurs7DataSet DataSet = new Kurs7DataSet();
+        medicationTableAdapter MTA = new medicationTableAdapter();
+        ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
+        ShoppingCartHelpTableAdapter SHTA = new ShoppingCartHelpTableAdapter();
 
         public Store()
         {
             InitializeComponent();
             data.ItemsSource = DataSet.medication.DefaultView;
             MTA.Fill(DataSet.medication);
-            data.SelectedIndex = -1;
+            STA.Fill(DataSet.ShoppingCart);
         }
 
         private void Dob_korz(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             int index = Int32.Parse(button.Tag.ToString());
-            index++;
             MessageBox.Show(index.ToString() );
+
+
+            string Sql = "select * from dbo.medication";
+            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            connection.Open();
+            SqlCommand command = new SqlCommand(Sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> names = new List<string>();
+            List<string> price = new List<string>();
+            while (reader.Read())
+            {
+                names.Add(reader["Name_medication"].ToString());
+                price.Add(reader["Price"].ToString());
+            }
+            reader.Close();
+            connection.Close();
+
+            int PriceInt = Int32.Parse(price[index]);
+            STA.InsertQuery(names[index], 1, PriceInt);
+            SHTA.InsertQuery(PriceInt);
+
+        }
+
+        private void korzina(object sender, RoutedEventArgs e)
+        {
+            ShoppingCart go = new ShoppingCart();
+            go.Show();
+            this.Close();
         }
 
         //Отправляет корзину в конец datagrid

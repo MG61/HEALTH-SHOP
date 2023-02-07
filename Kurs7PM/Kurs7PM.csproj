@@ -97,6 +97,9 @@
     <Compile Include="Sklad.xaml.cs">
       <DependentUpon>Sklad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Клиент\ShoppingCart.xaml.cs">
+      <DependentUpon>ShoppingCart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Клиент\Store.xaml.cs">
       <DependentUpon>Store.xaml</DependentUpon>
     </Compile>
@@ -171,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Клиент\ShoppingCart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Клиент\Store.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +232,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="images\cross.png" />
+    <Resource Include="images\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\arrow-left.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
