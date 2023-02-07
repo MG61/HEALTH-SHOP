@@ -249,8 +249,5 @@
   <ItemGroup>
     <Resource Include="images\arrow-right.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\confetti.gif" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

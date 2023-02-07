@@ -1,0 +1,22 @@
+﻿Create table medication(
+	ID_medication int identity(1,1) primary key,
+	Name_medication nvarchar(50) NOT NULL,
+	Quatinty_medication int  NOT NULL,
+	Price int  NOT NULL
+);
+
+
+Create table ShoppingCart(
+	ID_cart int identity(1,1) primary key,
+	Name_medication nvarchar(50) NOT NULL,
+	Quatinty_medication int  NOT NULL,
+	Price int  NOT NULL
+);
+
+Create table ShoppingCartHelp(
+	ID_carthelp int identity(1,1) primary key,
+	Price int  NOT NULL
+);
+
+Truncate table ShoppingCart
+Truncate table ShoppingCartHelp

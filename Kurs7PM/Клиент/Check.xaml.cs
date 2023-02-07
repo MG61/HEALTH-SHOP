@@ -16,6 +16,8 @@ using System.Data;
 using Excel = Microsoft.Office.Interop.Excel;
 using Kurs7PM.Kurs7DataSetTableAdapters;
 using System.Data.SqlClient;
+using System.Reflection;
+using WpfAnimatedGif;
 
 namespace Kurs7PM.Клиент
 {
@@ -42,6 +44,7 @@ namespace Kurs7PM.Клиент
                 sum += (int)row["Цена"];
             }
             summ.Text = sum.ToString();
+
         }
 
         //Переход к окну магазина
