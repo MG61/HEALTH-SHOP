@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using System.Drawing;
 
 
-namespace Kurs7PM
+namespace Kurs7PM.Клиент
 {
     /// <summary>
     /// Логика взаимодействия для Check.xaml

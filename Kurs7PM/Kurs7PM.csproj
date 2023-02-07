@@ -73,6 +73,9 @@
     <Compile Include="Client.xaml.cs">
       <DependentUpon>Client.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Kurs7DataSet.cs">
+      <DependentUpon>Kurs7DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Medication.xaml.cs">
       <DependentUpon>Medication.xaml</DependentUpon>
     </Compile>
@@ -94,7 +97,10 @@
     <Compile Include="Sklad.xaml.cs">
       <DependentUpon>Sklad.xaml</DependentUpon>
     </Compile>
-    <Page Include="Check.xaml">
+    <Compile Include="Клиент\Store.xaml.cs">
+      <DependentUpon>Store.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Клиент\Check.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,7 +116,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Авторизация\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -118,7 +124,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Check.xaml.cs">
+    <Compile Include="Клиент\Check.xaml.cs">
       <DependentUpon>Check.xaml</DependentUpon>
     </Compile>
     <Compile Include="Employee.xaml.cs">
@@ -129,7 +135,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Kurs7DataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Авторизация\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -158,6 +164,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sklad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Клиент\InterestButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Клиент\Store.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

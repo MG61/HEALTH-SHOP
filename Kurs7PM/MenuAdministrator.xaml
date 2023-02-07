@@ -25,7 +25,7 @@
         </Border>
         <Button Content="Администраторы" HorizontalAlignment="Left" Margin="358,253,0,0" VerticalAlignment="Top" Width="160" Click="admins" Height="38" FontFamily="Britannic Bold"/>
         <Button Content="Сотрудники" HorizontalAlignment="Left" Margin="358,0,0,0" VerticalAlignment="Center" Width="160" Click="employees" Height="38" FontFamily="Britannic Bold"/>
-        <Button Content="Чеки" HorizontalAlignment="Left" Margin="586,253,0,0" VerticalAlignment="Top" Width="160" Click="DELETE_sotr_Login" Height="38" FontFamily="Britannic Bold"/>
-        <Button Content="Выход"  Margin="586,0,0,0"   Click="EXIT" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="160" Height="38" RenderTransformOrigin="0.5,0.5" FontFamily="Britannic Bold"/>
+        <Button Content="Чеки" HorizontalAlignment="Left" Margin="586,253,0,0" VerticalAlignment="Top" Width="160" Click="check" Height="38" FontFamily="Britannic Bold"/>
+        <Button Content="Выход"  Margin="586,0,0,0"   Click="exit" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="160" Height="38" RenderTransformOrigin="0.5,0.5" FontFamily="Britannic Bold"/>
     </Grid>
 </Window>

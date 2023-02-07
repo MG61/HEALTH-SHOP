@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Kurs7PM
+namespace Kurs7PM.Авторизация
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

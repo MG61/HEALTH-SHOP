@@ -23,5 +23,25 @@ namespace Kurs7PM
         {
             InitializeComponent();
         }
+
+        private void admins(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void employees(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void check(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void exit(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

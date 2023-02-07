@@ -1,4 +1,4 @@
-﻿<Window x:Class="Kurs7PM.Check"
+﻿<Window x:Class="Kurs7PM.Клиент.Check"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Чек" Height="650" Width="1100" AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    
     <Grid>
         <Border Name="BorderLog" CornerRadius="10" Visibility="Visible" BorderThickness="0,7,0,0" Padding="1,0,0,0" Margin="0,0,-0.4,0">
             <!--Для закругления краёв-->
@@ -20,8 +21,12 @@
             </Border.Background>
         </Border>
         
-    <!--<Grid.Resources>
-        --><!--DataTemplate for Published Date column defined in Grid.Resources.  PublishDate is a property on the ItemsSource of type DateTime --><!--
+                <DataGrid x:Name="data" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="432,38,10,9.6" BorderBrush="Black" BorderThickness="2" VerticalContentAlignment="Center" >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Publish Date" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    <Grid.Resources>
         <DataTemplate x:Key="DateTemplate" >
             <StackPanel Width="100" Height="30">
                     <Border Background="LightBlue" BorderBrush="Black" BorderThickness="1">
@@ -29,18 +34,14 @@
                     </Border>
                 </StackPanel>
         </DataTemplate>
-        --><!--DataTemplate for the Published Date column when in edit mode. --><!--
+       
         <DataTemplate x:Key="EditingDateTemplate">
                 <Button Content="" Command="" Click="Dob_korz"/>
-                --><!--<DatePicker SelectedDate="{Binding PublishDate}"  />--><!--
+               
         </DataTemplate>
-    </Grid.Resources>-->
+    </Grid.Resources>
 
-        <DataGrid x:Name="data" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="432,38,10,9.6" BorderBrush="Black" BorderThickness="2" VerticalContentAlignment="Center" >
-            <!--<DataGrid.Columns>
-                <DataGridTemplateColumn Header="Publish Date" CellTemplate="{StaticResource DateTemplate}" CellEditingTemplate="{StaticResource EditingDateTemplate}" />
-            </DataGrid.Columns>-->
-        </DataGrid>
+
         
     </Grid>
 
