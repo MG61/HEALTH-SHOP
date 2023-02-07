@@ -9,9 +9,9 @@
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary Source="InterestButton.xaml" />
-    </Window.Resources>
+    </Window.Resources>-->
     <Grid>
         <Border Name="BorderLog" CornerRadius="10" Visibility="Visible" BorderThickness="0,7,0,0" Padding="1,0,0,0" Margin="0,0,-0.4,0">
             <!--Для закругления краёв-->

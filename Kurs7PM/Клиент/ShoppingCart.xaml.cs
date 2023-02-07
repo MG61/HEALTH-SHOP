@@ -3,23 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Kurs7PM.Клиент
 {
-    /// <summary>
-    /// Логика взаимодействия для ShoppingCart.xaml
-    /// </summary>
+
     public partial class ShoppingCart : Window
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
@@ -31,12 +21,17 @@ namespace Kurs7PM.Клиент
             InitializeComponent();
             data.ItemsSource = DataSet.ShoppingCart.DefaultView;
             STA.Fill(DataSet.ShoppingCart);
+            SHTA.Fill(DataSet.ShoppingCartHelp);
+
+            //Подсчёт суммы
+            int sum = 0;
+            foreach(DataRowView row in data.ItemsSource) { 
+                sum += (int)row["Цена"];
+            }
+            summ.Text = sum.ToString();
         }
 
-
-        int allpricetovar = 0;
-        int chet = 0;
-
+        //Увеличивает количество товара
         private void plus_korz(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -86,8 +81,17 @@ namespace Kurs7PM.Клиент
                 STA.UpdateQuery(names[index], pribavquantity, pribavprice,  id);
                 STA.Fill(DataSet.ShoppingCart);
             }
+
+            //Подсчёт суммы
+            int sum = 0;
+            foreach (DataRowView row in data.ItemsSource)
+            {
+                sum += (int)row["Цена"];
+            }
+            summ.Text = sum.ToString();
         }
 
+        //Уменьшает количество товара
         private void minus_korz(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -141,8 +145,17 @@ namespace Kurs7PM.Клиент
                 STA.UpdateQuery(names[index], pribavquantity, pribavprice, id);
                 STA.Fill(DataSet.ShoppingCart);
             }
+
+            //Подсчёт суммы
+            int sum = 0;
+            foreach (DataRowView row in data.ItemsSource)
+            {
+                sum += (int)row["Цена"];
+            }
+            summ.Text = sum.ToString();
         }
 
+        //Удаляет все данные из корзины
         private void delete_korz(object sender, RoutedEventArgs e)
         {
             string Sql1 = "Truncate table dbo.ShoppingCart";
@@ -161,6 +174,14 @@ namespace Kurs7PM.Клиент
             connection.Close();
             STA.Fill(DataSet.ShoppingCart);
             SHTA.Fill(DataSet.ShoppingCartHelp);
+
+            //Подсчёт суммы
+            int sum = 0;
+            foreach (DataRowView row in data.ItemsSource)
+            {
+                sum += (int)row["Цена"];
+            }
+            summ.Text = sum.ToString();
         }
 
         //Отправляет корзину в конец datagrid
@@ -186,7 +207,7 @@ namespace Kurs7PM.Клиент
 
         }
 
-        //Убирает первый столбец id
+        //Убирает первый столбец datagrid (id)
         private void DataGrid_OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.PropertyName == "ID_cart")
@@ -195,7 +216,7 @@ namespace Kurs7PM.Клиент
             }
         }
 
-
+        //Переход к магазину
         private void store(object sender, RoutedEventArgs e)
         {
             Store go = new Store();
@@ -203,12 +224,43 @@ namespace Kurs7PM.Клиент
             this.Close();
         }
 
+        //Переход к чеку
+        private void oplata(object sender, RoutedEventArgs e)
+        {
+            Check go = new Check();
+            go.Show();
+            this.Close();
+        }
+
+        //Позволяет перетаскивать окно
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
             {
                 this.DragMove();
             }
+        }
+
+        //Работа кнопки выключения программы
+        private void Exit_with_application(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        //Работа кнопки разворачивания программы
+        private void Maximized_with_application(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Normal)
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+            else { this.WindowState = WindowState.Normal; }
+        }
+
+        //Работа кнопки сворачивания программы
+        private void Minimazed_with_application(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

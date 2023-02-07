@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -14,34 +15,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Kurs7PM.Kurs7DataSetTableAdapters;
-
+using Kurs7PM.Авторизация;
 
 namespace Kurs7PM.Клиент
 {
-    /// <summary>
-    /// Логика взаимодействия для Store.xaml
-    /// </summary>
     public partial class Store : Window
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
-        medicationTableAdapter MTA = new medicationTableAdapter();
         ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
         ShoppingCartHelpTableAdapter SHTA = new ShoppingCartHelpTableAdapter();
+        medicationTableAdapter MTA = new medicationTableAdapter();
+        int prov = 0;
 
         public Store()
         {
             InitializeComponent();
             data.ItemsSource = DataSet.medication.DefaultView;
-            MTA.Fill(DataSet.medication);
+            SHTA.Fill(DataSet.ShoppingCartHelp);
             STA.Fill(DataSet.ShoppingCart);
+            MTA.Fill(DataSet.medication);
         }
 
+        //Добавление товара в корзину
         private void Dob_korz(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             int index = Int32.Parse(button.Tag.ToString());
-            MessageBox.Show(index.ToString() );
-
 
             string Sql = "select * from dbo.medication";
             SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
@@ -57,13 +56,37 @@ namespace Kurs7PM.Клиент
             }
             reader.Close();
             connection.Close();
-
+            STA.Fill(DataSet.ShoppingCart);
             int PriceInt = Int32.Parse(price[index]);
-            STA.InsertQuery(names[index], 1, PriceInt);
-            SHTA.InsertQuery(PriceInt);
-
+            for (int i = 0; i < DataSet.ShoppingCart.Rows.Count; i++)
+            {
+                if (names[index] == DataSet.ShoppingCart.Rows[i][1].ToString())
+                {
+                    prov = 1;
+                }
+            }
+            if (prov == 0)
+            {
+                STA.InsertQuery(names[index], 1, PriceInt);
+                SHTA.InsertQuery(PriceInt);
+            }
+            else if(prov == 1)
+            {
+                MessageBox.Show("Товар уже в корзине!");
+            }
+            prov = 0;
+            STA.Fill(DataSet.ShoppingCart);
         }
 
+        //Переход к окну авторизации
+        private void authorization(object sender, RoutedEventArgs e)
+        {
+            MainWindow go = new MainWindow();
+            go.Show();
+            this.Close();
+        }
+
+        //Переход к окну корзины
         private void korzina(object sender, RoutedEventArgs e)
         {
             ShoppingCart go = new ShoppingCart();
@@ -92,6 +115,37 @@ namespace Kurs7PM.Клиент
             {
                 e.Cancel = true;
             }
+        }
+
+        //Позволяет перетаскивать окно
+        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+        //Работа кнопки выключения программы
+        private void Exit_with_application(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        //Работа кнопки разворачивания программы
+        private void Maximized_with_application(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Normal)
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+            else { this.WindowState = WindowState.Normal; }
+        }
+
+        //Работа кнопки сворачивания программы
+        private void Minimazed_with_application(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }
