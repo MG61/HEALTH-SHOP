@@ -5,7 +5,6 @@
 	Price int  NOT NULL
 );
 
-
 Create table ShoppingCart(
 	ID_cart int identity(1,1) primary key,
 	Name_medication nvarchar(50) NOT NULL,
@@ -17,6 +16,34 @@ Create table ShoppingCartHelp(
 	ID_carthelp int identity(1,1) primary key,
 	Price int  NOT NULL
 );
+
+CREATE TABLE [dbo].[Administrator] (
+    [ID_administrator] INT           IDENTITY (1, 1) NOT NULL,
+    [Логин]            NVARCHAR (50) NOT NULL,
+    [Пароль]           NVARCHAR (50) NOT NULL,
+    [Фамилия]          NVARCHAR (50) NULL,
+    [Имя]              NVARCHAR (50) NULL,
+    [Отчество]         NVARCHAR (50) NULL,
+    CONSTRAINT [ID_administrator] PRIMARY KEY CLUSTERED ([ID_administrator] ASC)
+);
+
+CREATE TABLE [dbo].[Branch] (
+    [ID_branch] INT        IDENTITY (1, 1) NOT NULL,
+    [Name]      NCHAR (10) NULL,
+    CONSTRAINT [PK_Branch] PRIMARY KEY CLUSTERED ([ID_branch] ASC)
+);
+
+CREATE TABLE [dbo].[Employee] (
+    [ID_employee]  INT           IDENTITY (1, 1) NOT NULL,
+    [Логин]        NVARCHAR (50) NOT NULL,
+    [Пароль]       NVARCHAR (50) NOT NULL,
+    [Фамилия]      NVARCHAR (50) NULL,
+    [Имя]          NVARCHAR (50) NULL,
+    [Отчество]     NVARCHAR (50) NULL,
+    [Место_работы] NVARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED ([ID_employee] ASC)
+);
+
 
 Truncate table ShoppingCart
 Truncate table ShoppingCartHelp
