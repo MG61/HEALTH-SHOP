@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Kurs7PM"
-             StartupUri="Клиент/Store.xaml">
+             StartupUri="Администратор/Employee.xaml">
+            <!--StartupUri="Клиент/Store.xaml">-->
     <Application.Resources>
 
         <Style x:Key="buttonClose" TargetType="Button">

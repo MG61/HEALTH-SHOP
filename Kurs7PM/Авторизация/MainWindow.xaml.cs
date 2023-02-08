@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kurs7PM.Kurs7DataSetTableAdapters;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -21,19 +22,19 @@ namespace Kurs7PM.Авторизация
     /// </summary>
     public partial class MainWindow : Window
     {
-        Kurs7DataSet dataSet = new Kurs7DataSet();
-        //AdminTableAdapter ATA = new AdminTableAdapter();
+        Kurs7DataSet DataSet = new Kurs7DataSet();
+        AdministratorTableAdapter ATA = new AdministratorTableAdapter();
 
         public MainWindow()
         {
             InitializeComponent();
             //ATA.Fill(dataSet.Admin);
 
-            //if (0 == dataSet.Admin.Rows.Count)
-            //{
-            //    ATA.InsertQuery("Admin", "Admin", "Admin");
-            //    ATA.Fill(dataSet.Admin);
-            //}
+            if (0 == DataSet.Administrator.Rows.Count)
+            {
+                ATA.InsertQuery("Admin", "Admin", "Тестер", "Тестер", "Тестер");
+                ATA.Fill(DataSet.Administrator);
+            }
         }
 
         private void Voyti_Click(object sender, RoutedEventArgs e)

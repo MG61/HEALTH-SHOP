@@ -49,6 +49,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>drugstore.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
@@ -86,7 +89,13 @@
     <Compile Include="Medication.xaml.cs">
       <DependentUpon>Medication.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MenuAdministrator.xaml.cs">
+    <Compile Include="Администратор\Administrator.xaml.cs">
+      <DependentUpon>Administrator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Администратор\Branch.xaml.cs">
+      <DependentUpon>Branch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Администратор\MenuAdministrator.xaml.cs">
       <DependentUpon>MenuAdministrator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Order.xaml.cs">
@@ -110,6 +119,14 @@
     <Compile Include="Клиент\Store.xaml.cs">
       <DependentUpon>Store.xaml</DependentUpon>
     </Compile>
+    <Page Include="Администратор\Administrator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Администратор\Branch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Клиент\Check.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,7 +135,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Employee.xaml">
+    <Page Include="Администратор\Employee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,7 +154,7 @@
     <Compile Include="Клиент\Check.xaml.cs">
       <DependentUpon>Check.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Employee.xaml.cs">
+    <Compile Include="Администратор\Employee.xaml.cs">
       <DependentUpon>Employee.xaml</DependentUpon>
     </Compile>
     <Compile Include="Kurs7DataSet.Designer.cs">
@@ -153,7 +170,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MenuAdministrator.xaml">
+    <Page Include="Администратор\MenuAdministrator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -248,6 +265,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\arrow-right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="drugstore.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Сотрудник\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -38,7 +38,7 @@ namespace Kurs7PM.Клиент
             int index = Int32.Parse(button.Tag.ToString());
 
             string Sql1 = "select Price from dbo.ShoppingCartHelp";
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection1 = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
@@ -51,7 +51,7 @@ namespace Kurs7PM.Клиент
             connection1.Close();
 
             string Sql = "select * from dbo.ShoppingCart";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();
@@ -99,7 +99,7 @@ namespace Kurs7PM.Клиент
 
 
             string Sql = "select * from dbo.ShoppingCart";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();
@@ -116,7 +116,7 @@ namespace Kurs7PM.Клиент
             connection.Close();
 
             string Sql1 = "select Price from dbo.ShoppingCartHelp";
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection1 = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
@@ -159,14 +159,14 @@ namespace Kurs7PM.Клиент
         private void delete_korz(object sender, RoutedEventArgs e)
         {
             string Sql1 = "Truncate table dbo.ShoppingCart";
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection1 = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
             reader1.Close();
             connection1.Close();
             string Sql = "Truncate table dbo.ShoppingCartHelp";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();

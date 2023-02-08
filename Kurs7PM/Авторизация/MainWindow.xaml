@@ -7,31 +7,81 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="1100" AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-
-
-    <!--<Window.Resources>
-        <ResourceDictionary Source="InterestButton.xaml" />
-    </Window.Resources>-->
     <Grid>
-        <Border Name="BorderLog" CornerRadius="10" Visibility="Visible" BorderThickness="0,7,0,0" Padding="1,0,0,0" Margin="0,0,-0.4,0">
-            <!--Для закругления краёв-->
-            <Border.Background>
-                <LinearGradientBrush>
-                    <!--<GradientStop Color="ForestGreen" Offset="0.0"/>-->
-                    <GradientStop Color="#0e1c26" Offset="1.0"/>
-                    <GradientStop Color="#294861" Offset="0.0"/>
-                </LinearGradientBrush>
-                <!--Градиент-->
-            </Border.Background>
-        </Border>
-        <TextBlock Text="АВТОРИЗАЦИЯ" FontWeight="Bold" FontSize="36" TextAlignment="Center" VerticalAlignment="Top" Margin="252,77,206,0" FontFamily="Britannic Bold" Foreground="White"/>
-        <TextBlock  Text="ЛОГИН:" FontWeight="Bold" FontSize="30" TextAlignment="Center" VerticalAlignment="Center" Margin="164,235,805,371.6" Foreground="White" Height="43" FontFamily="Britannic Bold"/>
-        <TextBox Name="LOG" PreviewTextInput="log_PreviewTextInput" Background="White" FontWeight="Bold" FontSize="30" TextAlignment="Center" VerticalContentAlignment="Center" Margin="312,213,230,356.6" BorderBrush="White" BorderThickness="2"  FontFamily="Britannic Bold"/>
-        <TextBlock  Text="ПАРОЛЬ:" FontWeight="Bold" FontSize="30" TextAlignment="Center" VerticalAlignment="Top" Margin="126,327,788,0" Foreground="White" Height="43" FontFamily="Britannic Bold"/>
-        <TextBox Name="PASS" PreviewTextInput="pass_PreviewTextInput" FontWeight="Bold" FontSize="30" TextAlignment="Center" VerticalContentAlignment="Center" Margin="312,308,230,261.6" Background="White"  FontFamily="Britannic Bold"></TextBox>
-        <Button
-                        Content="ВОЙТИ"
-                        Click="Voyti_Click"
-                        Margin="402,489,356,80" FontFamily="Britannic Bold" FontSize="30"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Кнопки навигации-->
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Background="#444444" Panel.ZIndex="1" FlowDirection ="RightToLeft" MouseDown="StackPanel_MouseDown">
+
+            <Button Style="{StaticResource buttonClose }" Click="Exit_with_application">
+                <Image Width="15" Margin="2 0 0 0" Source="/images/cross.png"/>
+            </Button>
+
+            <Button Style="{StaticResource buttonMini }" Click="Maximized_with_application" Margin="5 0 0 0">
+                <Image Width="15" Margin="2 0 0 0" Source="/images/square.png"/>
+            </Button>
+
+            <Button Style="{StaticResource buttonMini }" Click="Minimazed_with_application" Margin="5 0 0 0">
+                <Image Width="15" Margin="2 0 0 0" Source="/images/minus.png"/>
+            </Button>
+        </StackPanel>
+
+        <!--Верхняя панель-->
+        <Grid Grid.Row="1" Background="#ecf0f1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Margin="0 40 0 30">
+                <TextBlock Text="NA" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" Margin="50 0 0 0"/>
+                <Rectangle VerticalAlignment="Stretch" Fill="#808080" Width="0.7" Margin="20 5 20 5"/>
+                <TextBlock Text="Авторизация" FontSize="26" FontWeight="SemiBold" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!--Центральная панель-->
+            <StackPanel Grid.Row="1" >
+            
+
+            </StackPanel>
+        </Grid>
+
+        <!--Окно карты-->
+        <Grid Grid.Column="1" Background="#616161" Grid.Row="1">
+            <!--Эффект блюра-->
+            <Grid.Effect>
+                <DropShadowEffect ShadowDepth="10" BlurRadius="50"/>
+            </Grid.Effect>
+
+            <StackPanel VerticalAlignment="Top" Margin="50 150 50 0">
+                <TextBlock Text="Авторизация" FontSize="24" FontWeight="SemiBold" Margin="0 0 0 20" Foreground="LightGreen"/>
+
+                <TextBlock Text="Логин" Foreground="white" FontSize="16"/>
+                <TextBox Margin="0 5 0 5" Name="login"/>
+                <TextBlock Text="Пароль" Foreground="white" FontSize="16"/>
+                <TextBox Margin="0 0 0 5" Name="password"/>
+                <Button Margin="0 10 0 0" Background="LightGreen" Foreground="#262729" FontSize="13" FontWeight="SemiBold">
+                    <StackPanel>
+                        <TextBlock Text="Регистрация для клиентов"/>
+                    </StackPanel>
+                </Button>
+                <Button Margin="0 10 0 0" Background="LightGreen" Foreground="#262729" FontSize="13" FontWeight="SemiBold">
+                    <StackPanel>
+                        <TextBlock Text="Регистрация для поставщиков"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <Button Content="Добавить" Click="add_administrator" Style="{StaticResource buttonCheckout}"/>
+        </Grid>
     </Grid>
 </Window>

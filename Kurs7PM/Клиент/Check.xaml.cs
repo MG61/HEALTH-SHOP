@@ -17,13 +17,9 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Kurs7PM.Kurs7DataSetTableAdapters;
 using System.Data.SqlClient;
 using System.Reflection;
-using WpfAnimatedGif;
 
 namespace Kurs7PM.Клиент
 {
-    /// <summary>
-    /// Логика взаимодействия для Check.xaml
-    /// </summary>
     public partial class Check : Window
     {
 
@@ -44,21 +40,20 @@ namespace Kurs7PM.Клиент
                 sum += (int)row["Цена"];
             }
             summ.Text = sum.ToString();
-
         }
 
         //Переход к окну магазина
         private void authorization(object sender, RoutedEventArgs e)
         {
             string Sql1 = "Truncate table dbo.ShoppingCart";
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection1 = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
             reader1.Close();
             connection1.Close();
             string Sql = "Truncate table dbo.ShoppingCartHelp";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();
@@ -152,14 +147,14 @@ namespace Kurs7PM.Клиент
             wb.Activate();
             
             string Sql1 = "Truncate table dbo.ShoppingCart";
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection1 = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
             reader1.Close();
             connection1.Close();
             string Sql = "Truncate table dbo.ShoppingCartHelp";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();

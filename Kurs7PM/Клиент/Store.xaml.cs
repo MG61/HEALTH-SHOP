@@ -43,7 +43,7 @@ namespace Kurs7PM.Клиент
             int index = Int32.Parse(button.Tag.ToString());
 
             string Sql = "select * from dbo.medication";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();
