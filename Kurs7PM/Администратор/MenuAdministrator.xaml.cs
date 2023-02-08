@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kurs7PM.Авторизация;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -62,7 +63,7 @@ namespace Kurs7PM.Администратор
         {
             Employee go = new Employee();
             go.Show();
-            this.Close();
+            Close();
         }
 
         //Кнопка для перехода к другой активности
@@ -70,13 +71,15 @@ namespace Kurs7PM.Администратор
         {
             Branch go = new Branch();
             go.Show();
-            this.Close();
+            Close();
         }
 
         //Кнопка для перехода к другой активности
         private void exit(object sender, RoutedEventArgs e)
         {
-
+            MainWindow go = new MainWindow();
+            go.Show();
+            Close();
         }
 
         //Кнопка для перехода к другой активности
@@ -84,7 +87,7 @@ namespace Kurs7PM.Администратор
         {
             Administrator go = new Administrator();
             go.Show();
-            this.Close();
+            Close();
         }
     }
 }

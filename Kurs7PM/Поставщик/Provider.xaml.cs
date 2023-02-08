@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Kurs7PM
+namespace Kurs7PM.Поставщик
 {
     /// <summary>
     /// Логика взаимодействия для Provider.xaml
@@ -22,26 +22,6 @@ namespace Kurs7PM
         public Provider()
         {
             InitializeComponent();
-        }
-
-        private void DOB_sotr_Login(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DELETE_sotr_Login(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UPDATE_sotr_Login(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void EXIT_2(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

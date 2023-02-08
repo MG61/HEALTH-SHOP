@@ -75,7 +75,7 @@ namespace Kurs7PM.Администратор
         {
             MenuAdministrator go = new MenuAdministrator();
             go.Show();
-            this.Close();
+            Close();
         }
 
         //Позволяет перетаскивать окно
@@ -121,7 +121,7 @@ namespace Kurs7PM.Администратор
         {
             Employee go = new Employee();
             go.Show();
-            this.Close();
+            Close();
         }
     }
 }

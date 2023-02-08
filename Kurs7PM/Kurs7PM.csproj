@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>drugstore.ico</ApplicationIcon>
+    <ApplicationIcon>images\medicinestore.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
@@ -80,14 +80,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Client.xaml.cs">
-      <DependentUpon>Client.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Kurs7DataSet.cs">
       <DependentUpon>Kurs7DataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Medication.xaml.cs">
-      <DependentUpon>Medication.xaml</DependentUpon>
     </Compile>
     <Compile Include="Администратор\Administrator.xaml.cs">
       <DependentUpon>Administrator.xaml</DependentUpon>
@@ -98,26 +92,17 @@
     <Compile Include="Администратор\MenuAdministrator.xaml.cs">
       <DependentUpon>MenuAdministrator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Order.xaml.cs">
-      <DependentUpon>Order.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pharmacy.xaml.cs">
-      <DependentUpon>Pharmacy.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Provider.xaml.cs">
-      <DependentUpon>Provider.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Recipe.xaml.cs">
-      <DependentUpon>Recipe.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Sklad.xaml.cs">
-      <DependentUpon>Sklad.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Клиент\ShoppingCart.xaml.cs">
       <DependentUpon>ShoppingCart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Клиент\Store.xaml.cs">
       <DependentUpon>Store.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Поставщик\Provider.xaml.cs">
+      <DependentUpon>Provider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Сотрудник\Pharmacy.xaml.cs">
+      <DependentUpon>Pharmacy.xaml</DependentUpon>
     </Compile>
     <Page Include="Администратор\Administrator.xaml">
       <SubType>Designer</SubType>
@@ -131,17 +116,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Client.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Администратор\Employee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="InterestButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Авторизация\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -166,31 +143,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Medication.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Администратор\MenuAdministrator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Order.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pharmacy.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Provider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Recipe.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Sklad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,6 +152,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Клиент\Store.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Поставщик\Provider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Сотрудник\Pharmacy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -267,10 +228,19 @@
     <Resource Include="images\arrow-right.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="drugstore.ico" />
+    <Resource Include="images\medicinestore.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="slideshow\1.jpg" />
+    <Resource Include="slideshow\2.jpg" />
+    <Resource Include="slideshow\3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Сотрудник\" />
+    <Resource Include="images\love.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\logo_company.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

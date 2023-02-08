@@ -35,7 +35,7 @@ namespace Kurs7PM.Администратор
             BTA.Fill(DataSet.Branch);
 
             string Sql1 = "select Name from dbo.Branch";
-            SqlConnection connection1 = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
@@ -86,7 +86,7 @@ namespace Kurs7PM.Администратор
         {
             MenuAdministrator go = new MenuAdministrator();
             go.Show();
-            this.Close();
+            Close();
         }
 
         //Позволяет перетаскивать окно
@@ -132,7 +132,7 @@ namespace Kurs7PM.Администратор
         {
             Branch go =  new Branch();
             go.Show();
-            this.Close();
+            Close();
         }
     }
 

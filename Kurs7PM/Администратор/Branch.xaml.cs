@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,8 +35,34 @@ namespace Kurs7PM.Администратор
             Button button = sender as Button;
             int index = Int32.Parse(button.Tag.ToString());
             int id = index + 1;
+
+
+            string Sql = "select * from dbo.branch";
+            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            connection.Open();
+            SqlCommand command = new SqlCommand(Sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> name = new List<string>();
+            while (reader.Read())
+            {
+                name.Add(reader["Name"].ToString());
+            }
+            reader.Close();
+            connection.Close();
+
+            string Sql1 = "DROP TABLE " + name[index];
+            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            connection1.Open();
+            SqlCommand command1 = new SqlCommand(Sql1, connection1);
+            SqlDataReader reader1 = command1.ExecuteReader();
+            reader1.Close();
+            connection1.Close();
+
             BTA.DeleteQuery(id);
             BTA.Fill(DataSet.Branch);
+
+
+
         }
 
         //Отправляет удаление в конец datagrid
@@ -66,7 +93,7 @@ namespace Kurs7PM.Администратор
         {
             MenuAdministrator go = new MenuAdministrator();
             go.Show();
-            this.Close();
+            Close();
         }
 
         //Позволяет перетаскивать окно
@@ -105,6 +132,15 @@ namespace Kurs7PM.Администратор
         {
             BTA.InsertQuery(filials.Text);
             BTA.Fill(DataSet.Branch);
+
+            string priem = filials.Text;
+            string Sql = "CREATE TABLE " + priem + "(\tID_medication int identity(1,1) primary key,\r\n\tНазвание nvarchar(50) NOT NULL,\r\n\tКоличество int  NOT NULL,\r\n\tЦена int  NOT NULL);";
+            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            connection.Open();
+            SqlCommand command = new SqlCommand(Sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            reader.Close();
+            connection.Close();
         }
 
         //Переход к сотрудникам
@@ -112,7 +148,7 @@ namespace Kurs7PM.Администратор
         {
             Employee go = new Employee();
             go.Show();
-            this.Close();
+            Close();
         }
     }
 }
