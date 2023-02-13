@@ -1,11 +1,9 @@
-﻿using Kurs7PM.Kurs7DataSetTableAdapters;
-using Kurs7PM.Авторизация;
-using Kurs7PM.Клиент;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,56 +15,45 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Kurs7PM.Сотрудник
+namespace Kurs7PM.Авторизация.Регистрация
 {
-
-    public partial class Pharmacy : Window
+    /// <summary>
+    /// Логика взаимодействия для Client.xaml
+    /// </summary>
+    public partial class Client : Window
     {
-        Kurs7DataSet DataSet = new Kurs7DataSet();
-        ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
+
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
-        public Pharmacy(string address)
+        public Client()
         {
             InitializeComponent();
-
-            addressap.Text = address;
-
-            string Sql = "select * from " + address;
-            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
-            connection.Open();
-            SqlDataAdapter command = new SqlDataAdapter(Sql, connection);
-            DataSet ds = new DataSet();
-            command.Fill(ds, address);
-            connection.Close();
-
-            data.ItemsSource = ds.Tables[address].DefaultView; ;
         }
 
-
-        //Переход к окну авторизации
-        private void authorization(object sender, RoutedEventArgs e)
+        //Добавление клиента
+        private void add_Provider(object sender, RoutedEventArgs e)
         {
+            string Sql5 = "INSERT INTO dbo.Client" + " VALUES (" + "'" + login.Text + "'" + ", " + "'" + password.Text + "'" + ", " + "'" + familia.Text + "'" + ", " + "'" + name.Text + "'" + ", " + "'" + middle_name.Text + "');";
+            SqlConnection connection5 = new SqlConnection(Kurs7ConnectionString);
+            connection5.Open();
+            SqlCommand command5 = new SqlCommand();
+            command5.CommandText = Sql5;
+            command5.Connection = connection5;
+            command5.ExecuteNonQuery();
+            connection5.Close();
+            MessageBox.Show("Вы успешно зарегистрированы!");
             MainWindow go = new MainWindow();
             go.Show();
             Close();
         }
 
-        //Переход к окну корзины
-        private void provider_buy(object sender, RoutedEventArgs e)
+
+        //Переход к меню
+        private void auth(object sender, RoutedEventArgs e)
         {
-            Zakup go = new Zakup(addressap.Text);
+            MainWindow go = new MainWindow();
             go.Show();
             Close();
-        }
-
-        //Убирает первый столбец id
-        private void DataGrid_OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            if (e.PropertyName == "ID_medication")
-            {
-                e.Cancel = true;
-            }
         }
 
         //Позволяет перетаскивать окно

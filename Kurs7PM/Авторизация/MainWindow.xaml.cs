@@ -1,6 +1,7 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
 using Kurs7PM.Авторизация.Регистрация;
 using Kurs7PM.Администратор;
+using Kurs7PM.Клиент;
 using Kurs7PM.Поставщик;
 using Kurs7PM.Сотрудник;
 using System;
@@ -35,6 +36,7 @@ namespace Kurs7PM.Авторизация
         AdministratorTableAdapter ATA = new AdministratorTableAdapter();
         EmployeeTableAdapter ETA = new EmployeeTableAdapter();
         ProviderTableAdapter PTA = new ProviderTableAdapter();
+        ClientTableAdapter CTA = new ClientTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public MainWindow()
@@ -43,6 +45,7 @@ namespace Kurs7PM.Авторизация
             ATA.Fill(DataSet.Administrator);
             ETA.Fill(DataSet.Employee);
             PTA.Fill(DataSet.Provider);
+            CTA.Fill(DataSet.Client);
 
             if (0 == DataSet.Administrator.Rows.Count)
             {
@@ -89,6 +92,7 @@ namespace Kurs7PM.Авторизация
             AdminAuth(log, pass);
             EmployeeAuth(log, pass);
             ProviderAuth(log, pass);
+            ClientAuth(log, pass);
         }
         
         int nepov = 0;
@@ -202,6 +206,31 @@ namespace Kurs7PM.Авторизация
             }
         }
 
+        private void ClientAuth(string custlog, string custpass)
+        {
+            try
+            {
+                for (int i = 0; i < DataSet.Client.Rows.Count; i++)
+                {
+                    if (custlog == DataSet.Client.Rows[i][1].ToString() && custpass == DataSet.Client.Rows[i][2].ToString())
+                    {
+                        prov = 1;
+                        Store da1 = new Store();
+                        da1.Show();
+                        this.Close();
+                    }
+                    else if (prov == 0)
+                    {
+                        MessageBox.Show("Введите данные!");
+                    }
+                }
+            }
+            catch
+            {
+                return;
+            }
+        }
+
 
         private void provider(object sender, RoutedEventArgs e)
         {
@@ -214,9 +243,17 @@ namespace Kurs7PM.Авторизация
         {
             e.Handled = "qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNMйцукёенгшщзхъэждлорпавыфячсмитьбю.ЙЦУКЕНГШЩЗХЪЭЖДЛОРПАВЫФЯЧСМИТЬБЮЁ".IndexOf(e.Text) < 0;
         }
+
         private void pass_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = "qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNMйцукёенгшщзхъэждлорпавыфячсмитьбю.ЙЦУКЕНГШЩЗХЪЭЖДЛОРПАВЫФЯЧСМИТЬБЮЁ".IndexOf(e.Text) < 0;
+        }
+
+        private void clientreg(object sender, RoutedEventArgs e)
+        {
+            Client da1 = new Client();
+            da1.Show();
+            this.Close();
         }
     }
 }

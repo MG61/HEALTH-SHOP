@@ -83,6 +83,9 @@
     <Compile Include="Kurs7DataSet.cs">
       <DependentUpon>Kurs7DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Авторизация\Регистрация\Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Авторизация\Регистрация\Provider.xaml.cs">
       <DependentUpon>Provider.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
     <Compile Include="Сотрудник\Zakup.xaml.cs">
       <DependentUpon>Zakup.xaml</DependentUpon>
     </Compile>
+    <Page Include="Авторизация\Регистрация\Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Авторизация\Регистрация\Provider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

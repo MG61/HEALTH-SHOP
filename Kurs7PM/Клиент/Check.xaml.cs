@@ -25,7 +25,6 @@ namespace Kurs7PM.Клиент
 
         Kurs7DataSet DataSet = new Kurs7DataSet();
         ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
-        ShoppingCartHelpTableAdapter SHTA = new ShoppingCartHelpTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public Check()
@@ -61,7 +60,6 @@ namespace Kurs7PM.Клиент
             reader.Close();
             connection.Close();
             STA.Fill(DataSet.ShoppingCart);
-            SHTA.Fill(DataSet.ShoppingCartHelp);
 
             Store go = new Store();
             go.Show();
@@ -154,15 +152,7 @@ namespace Kurs7PM.Клиент
             SqlDataReader reader1 = command1.ExecuteReader();
             reader1.Close();
             connection1.Close();
-            string Sql = "Truncate table dbo.ShoppingCartHelp";
-            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
-            connection.Open();
-            SqlCommand command = new SqlCommand(Sql, connection);
-            SqlDataReader reader = command.ExecuteReader();
-            reader.Close();
-            connection.Close();
             STA.Fill(DataSet.ShoppingCart);
-            SHTA.Fill(DataSet.ShoppingCartHelp);
 
             //Подсчёт суммы
             int sum = 0;

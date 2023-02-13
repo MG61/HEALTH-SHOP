@@ -16,7 +16,6 @@ namespace Kurs7PM.Клиент
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
         ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
-        ShoppingCartHelpTableAdapter SHTA = new ShoppingCartHelpTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         string medicine;
@@ -25,7 +24,6 @@ namespace Kurs7PM.Клиент
             InitializeComponent();
             data.ItemsSource = DataSet.ShoppingCart.DefaultView;
             STA.Fill(DataSet.ShoppingCart);
-            SHTA.Fill(DataSet.ShoppingCartHelp);
 
             medicine = name_medicine;
 

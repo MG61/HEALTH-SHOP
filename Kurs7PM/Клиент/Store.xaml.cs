@@ -24,16 +24,13 @@ namespace Kurs7PM.Клиент
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
         ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
-        ShoppingCartHelpTableAdapter SHTA = new ShoppingCartHelpTableAdapter();
-        medicationTableAdapter MTA = new medicationTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public Store()
         {
             InitializeComponent();
-            SHTA.Fill(DataSet.ShoppingCartHelp);
             STA.Fill(DataSet.ShoppingCart);
-            MTA.Fill(DataSet.medication);
+
 
             string Sql = "select * from dbo.Branch";
             SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
