@@ -1,5 +1,7 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
+using Kurs7PM.Авторизация.Регистрация;
 using Kurs7PM.Администратор;
+using Kurs7PM.Поставщик;
 using Kurs7PM.Сотрудник;
 using System;
 using System.Collections.Generic;
@@ -32,12 +34,15 @@ namespace Kurs7PM.Авторизация
         Kurs7DataSet DataSet = new Kurs7DataSet();
         AdministratorTableAdapter ATA = new AdministratorTableAdapter();
         EmployeeTableAdapter ETA = new EmployeeTableAdapter();
+        ProviderTableAdapter PTA = new ProviderTableAdapter();
+        string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public MainWindow()
         {
             InitializeComponent();
             ATA.Fill(DataSet.Administrator);
             ETA.Fill(DataSet.Employee);
+            PTA.Fill(DataSet.Provider);
 
             if (0 == DataSet.Administrator.Rows.Count)
             {
@@ -77,19 +82,18 @@ namespace Kurs7PM.Авторизация
             this.WindowState = WindowState.Minimized;
         }
 
-
         private void Voyti_Click(object sender, RoutedEventArgs e)
         {
             string log = login.Text;
             string pass = password.Text;
             AdminAuth(log, pass);
             EmployeeAuth(log, pass);
-            //RukAuth(log, pass);
+            ProviderAuth(log, pass);
         }
-
         
         int nepov = 0;
         int prov = 1;
+
         private void AdminAuth(string adminlog, string adminpass)
         {
             try
@@ -113,7 +117,6 @@ namespace Kurs7PM.Авторизация
                        MessageBox.Show("Введите данные!");
                     }
                 }
-
             }
             catch
             {
@@ -132,7 +135,7 @@ namespace Kurs7PM.Авторизация
                     {
                         prov = 1;
                         string Sql = "select * from dbo.Employee";
-                        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+                        SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
                         connection.Open();
                         SqlCommand command = new SqlCommand(Sql, connection);
                         SqlDataReader reader = command.ExecuteReader();
@@ -160,29 +163,52 @@ namespace Kurs7PM.Авторизация
             }
         }
 
-        //private void RukAuth(string custlog, string custpass)
-        //{
-        //    try
-        //    {
-        //        for (int i = 0; i < dataSet.Admin.Rows.Count; i++)
-        //        {
-        //            if (i > dataSet.Admin.Rows.Count)
-        //            {
-        //                return;
-        //            }
-        //            else if (custlog == dataSet.Admin.Rows[i][0].ToString() && custpass == dataSet.Admin.Rows[i][1].ToString() && "Ruk" == dataSet.Admin.Rows[i][2].ToString())
-        //            {
-        //                Ruk da1 = new Ruk();
-        //                da1.Show();
-        //                this.Close();
-        //            }
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        return;
-        //    }
-        //}
+        private void ProviderAuth(string custlog, string custpass)
+        {
+            try
+            {
+                for (int i = 0; i < DataSet.Provider.Rows.Count; i++)
+                {
+                    if (custlog == DataSet.Provider.Rows[i][1].ToString() && custpass == DataSet.Provider.Rows[i][2].ToString())
+                    {
+                        prov = 1;
+
+                        string Sql = "select * from dbo.Provider";
+                        SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(Sql, connection);
+                        SqlDataReader reader = command.ExecuteReader();
+                        List<string> names = new List<string>();
+                        while (reader.Read())
+                        {
+                            names.Add(reader["Склад"].ToString());
+                        }
+                        reader.Close();
+                        connection.Close();
+
+                        Поставщик.Provider da1 = new Поставщик.Provider(names[i]);
+                        da1.Show();
+                        this.Close();
+                    }
+                    else if (prov == 0)
+                    {
+                        MessageBox.Show("Введите данные!");
+                    }
+                }
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+
+        private void provider(object sender, RoutedEventArgs e)
+        {
+            Авторизация.Регистрация.Provider go = new Авторизация.Регистрация.Provider("");
+            go.Show();
+            Close();
+        }
 
         private void log_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

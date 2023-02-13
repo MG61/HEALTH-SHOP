@@ -1,4 +1,5 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
+using Kurs7PM.Авторизация.Регистрация;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Configuration;
 
 namespace Kurs7PM.Клиент
 {
@@ -15,13 +17,17 @@ namespace Kurs7PM.Клиент
         Kurs7DataSet DataSet = new Kurs7DataSet();
         ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
         ShoppingCartHelpTableAdapter SHTA = new ShoppingCartHelpTableAdapter();
+        string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
-        public ShoppingCart()
+        string medicine;
+        public ShoppingCart(string name_medicine)
         {
             InitializeComponent();
             data.ItemsSource = DataSet.ShoppingCart.DefaultView;
             STA.Fill(DataSet.ShoppingCart);
             SHTA.Fill(DataSet.ShoppingCartHelp);
+
+            medicine = name_medicine;
 
             //Подсчёт суммы
             int sum = 0;
@@ -36,22 +42,12 @@ namespace Kurs7PM.Клиент
         {
             Button button = sender as Button;
             int index = Int32.Parse(button.Tag.ToString());
+            int pomindex = index + 1;
 
-            string Sql1 = "select Price from dbo.ShoppingCartHelp";
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
-            connection1.Open();
-            SqlCommand command1 = new SqlCommand(Sql1, connection1);
-            SqlDataReader reader1 = command1.ExecuteReader();
-            List<string> priceone = new List<string>();
-            while (reader1.Read())
-            {
-                priceone.Add(reader1["Price"].ToString());
-            }
-            reader1.Close();
-            connection1.Close();
+            STA.Fill(DataSet.ShoppingCart);
 
             string Sql = "select * from dbo.ShoppingCart";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();
@@ -60,27 +56,96 @@ namespace Kurs7PM.Клиент
             List<string> price = new List<string>();
             while (reader.Read())
             {
-                names.Add(reader["Name_medication"].ToString());
-                quantity.Add(reader["Quatinty_medication"].ToString());
-                price.Add(reader["Price"].ToString());
+                names.Add(reader["Название"].ToString());
+                quantity.Add(reader["Количество"].ToString());
+                price.Add(reader["Цена"].ToString());
             }
             reader.Close();
             connection.Close();
 
-
-
+            //Добавляем корзине
             int pribavquantity = Int32.Parse(quantity[index]);
             pribavquantity++;
-            int pribavprice = Int32.Parse(price[index]);
-            int pribavpriceone = Int32.Parse(priceone[index]);
-            pribavprice += pribavpriceone;
 
-            if (data.SelectedItem != null)
+            //Количество товаров
+            int quan = Int32.Parse(quantity[index].ToString());
+
+            try
             {
-                int id = index + 1;
-                STA.UpdateQuery(names[index], pribavquantity, pribavprice,  id);
-                STA.Fill(DataSet.ShoppingCart);
+            string quantitycompany = "";
+            string podchet = "";
+            string Sql6 = "select * from " + medicine + " WHERE Название =" + "'" + names[index] + "';";
+            SqlConnection connection6 = new SqlConnection(Kurs7ConnectionString);
+            connection6.Open();
+            SqlCommand command6 = new SqlCommand(Sql6, connection6);
+            SqlDataReader reader6 = command6.ExecuteReader();
+            while (reader6.Read())
+            {
+                quantitycompany = reader6["Количество"].ToString();
+                podchet = reader6["Цена"].ToString();
             }
+            reader6.Close();
+            connection6.Close();
+
+
+            
+            int podind = Int32.Parse(quantity[index].ToString());
+            int pod = Int32.Parse(podchet.ToString()) * pribavquantity;
+
+            //Прибавляем количество
+            string Sql4 = "UPDATE dbo.ShoppingCart SET Количество = " + pribavquantity + ", Цена = " + pod + " WHERE Название=" + "'" + names[index] + "';";
+            SqlConnection connection4 = new SqlConnection(Kurs7ConnectionString);
+            connection4.Open();
+            SqlCommand command4 = new SqlCommand();
+            command4.CommandText = Sql4;
+            command4.Connection = connection4;
+            command4.ExecuteNonQuery();
+            connection4.Close();
+
+            string Sql3 = "select * from " + medicine;
+            SqlConnection connection3 = new SqlConnection(Kurs7ConnectionString);
+            connection3.Open();
+            SqlCommand command3 = new SqlCommand(Sql3, connection3);
+            SqlDataReader reader3 = command3.ExecuteReader();
+            List<string> names3 = new List<string>();
+            List<string> quantity3 = new List<string>();
+            List<string> price3 = new List<string>();
+            while (reader3.Read())
+            {
+                names3.Add(reader3["Название"].ToString());
+                quantity3.Add(reader3["Количество"].ToString());
+                price3.Add(reader3["Цена"].ToString());
+            }
+            reader3.Close();
+            connection3.Close();
+
+            //  Отнимаем у магазина
+            int pribavquantity1 = Int32.Parse(quantity3[index]);
+            pribavquantity1--;
+
+
+
+
+
+                //Если товар есть, то отнимает количество
+             if (pribavquantity1 >= 1)
+            {
+                string Sql1 = "UPDATE " + medicine + " SET Количество = " + pribavquantity1 + " WHERE Название=" + "'" + names3[index] + "';";
+                SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
+                connection1.Open();
+                SqlCommand command1 = new SqlCommand();
+                command1.CommandText = Sql1;
+                command1.Connection = connection1;
+                command1.ExecuteNonQuery();
+                connection1.Close();
+            }
+            }
+            catch
+            {
+                MessageBox.Show("Товар закончился!");
+            }
+
+            STA.Fill(DataSet.ShoppingCart);
 
             //Подсчёт суммы
             int sum = 0;
@@ -96,10 +161,14 @@ namespace Kurs7PM.Клиент
         {
             Button button = sender as Button;
             int index = Int32.Parse(button.Tag.ToString());
+            int pomindex = index + 1;
 
+            //Переменная с таблицей корзины
+            string shop = "dbo.ShoppingCart";
 
-            string Sql = "select * from dbo.ShoppingCart";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            //Вывод таблицы с препаратами
+            string Sql = "select * from " + medicine;
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();
@@ -108,43 +177,91 @@ namespace Kurs7PM.Клиент
             List<string> price = new List<string>();
             while (reader.Read())
             {
-                names.Add(reader["Name_medication"].ToString());
-                quantity.Add(reader["Quatinty_medication"].ToString());
-                price.Add(reader["Price"].ToString());
+                names.Add(reader["Название"].ToString());
+                quantity.Add(reader["Количество"].ToString());
+                price.Add(reader["Цена"].ToString());
             }
             reader.Close();
             connection.Close();
 
-            string Sql1 = "select Price from dbo.ShoppingCartHelp";
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
-            connection1.Open();
-            SqlCommand command1 = new SqlCommand(Sql1, connection1);
-            SqlDataReader reader1 = command1.ExecuteReader();
-            List<string> priceone = new List<string>();
-            while (reader1.Read())
+            //Вывод таблицы с корзиной
+            string Sql3 = "select * from " + shop;
+            SqlConnection connection3 = new SqlConnection(Kurs7ConnectionString);
+            connection3.Open();
+            SqlCommand command3 = new SqlCommand(Sql3, connection3);
+            SqlDataReader reader3 = command3.ExecuteReader();
+            List<string> names3 = new List<string>();
+            List<string> quantity3 = new List<string>();
+            List<string> price3 = new List<string>();
+            while (reader3.Read())
             {
-                priceone.Add(reader1["Price"].ToString());
+                names3.Add(reader3["Название"].ToString());
+                quantity3.Add(reader3["Количество"].ToString());
+                price3.Add(reader3["Цена"].ToString());
             }
-            reader1.Close();
+            reader3.Close();
+            connection3.Close();
+
+            //Добавляем магазину
+            int pribavquantity = Int32.Parse(quantity[index]);
+            pribavquantity++;
+
+            string quantitycompany = "";
+            string podchet = "";
+            string Sql6 = "select * from " + medicine  + " WHERE Название =" + "'" + names3[index] + "';";
+                SqlConnection connection6 = new SqlConnection(Kurs7ConnectionString);
+                connection6.Open();
+                SqlCommand command6 = new SqlCommand(Sql6, connection6);
+                SqlDataReader reader6 = command6.ExecuteReader();
+                while (reader6.Read())
+                {
+                podchet = reader6["Цена"].ToString();
+                quantitycompany = reader6["Количество"].ToString();
+                }
+                reader6.Close();
+                connection6.Close();
+
+            //Количество товаров
+            int quan = Int32.Parse(quantitycompany.ToString());
+            quan++;
+
+            //Прибавляем количество
+            string Sql4 = "UPDATE " + medicine + " SET Количество = " + quan + " WHERE Название=" + "'" + names3[index] + "';";
+            SqlConnection connection4 = new SqlConnection(Kurs7ConnectionString);
+            connection4.Open();
+            SqlCommand command4 = new SqlCommand();
+            command4.CommandText = Sql4;
+            command4.Connection = connection4;
+            command4.ExecuteNonQuery();
+            connection4.Close();
+
+            int quanminus = Int32.Parse(quantity3[index].ToString());
+            quanminus--;
+            int pod = Int32.Parse(podchet.ToString()) * quanminus;
+            string Sql1 = "UPDATE dbo.ShoppingCart" + " SET Количество = " + quanminus + ", Цена = " + pod + " WHERE Название=" + "'" + names3[index] + "';";
+            SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
+            connection1.Open();
+            SqlCommand command1 = new SqlCommand();
+            command1.CommandText = Sql1;
+            command1.Connection = connection1;
+            command1.ExecuteNonQuery();
             connection1.Close();
 
-            int pribavquantity = Int32.Parse(quantity[index]);
-            pribavquantity--;
-            int pribavprice = Int32.Parse(price[index]);
-            int pribavpriceone = Int32.Parse(priceone[index]);
-            pribavprice -= pribavpriceone;
 
 
-            if (pribavquantity == 0)
-            {
-                MessageBox.Show("Вы не можете удалить товар!");
-            }
-            else if(pribavquantity >= 1)
-            {
-                int id = index + 1;
-                STA.UpdateQuery(names[index], pribavquantity, pribavprice, id);
-                STA.Fill(DataSet.ShoppingCart);
-            }
+                //Если товара нет, то удаляет его
+                if (quanminus == 0)
+                {
+                    string Sql10 = "DELETE  FROM " + shop + " WHERE Название=" + "'" + names3[index] + "';";
+                    SqlConnection connection10 = new SqlConnection(Kurs7ConnectionString);
+                    connection10.Open();
+                    SqlCommand command10 = new SqlCommand(Sql10, connection10);
+                    SqlDataReader reader10 = command10.ExecuteReader();
+                    reader10.Close();
+                    connection10.Close();
+                }
+
+            STA.Fill(DataSet.ShoppingCart);
 
             //Подсчёт суммы
             int sum = 0;
@@ -159,22 +276,13 @@ namespace Kurs7PM.Клиент
         private void delete_korz(object sender, RoutedEventArgs e)
         {
             string Sql1 = "Truncate table dbo.ShoppingCart";
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
             reader1.Close();
             connection1.Close();
-            string Sql = "Truncate table dbo.ShoppingCartHelp";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
-            connection.Open();
-            SqlCommand command = new SqlCommand(Sql, connection);
-            SqlDataReader reader = command.ExecuteReader();
-            reader.Close();
-            connection.Close();
             STA.Fill(DataSet.ShoppingCart);
-            SHTA.Fill(DataSet.ShoppingCartHelp);
-
             //Подсчёт суммы
             int sum = 0;
             foreach (DataRowView row in data.ItemsSource)

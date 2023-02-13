@@ -21,6 +21,7 @@ namespace Kurs7PM.Администратор
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
         BranchTableAdapter BTA = new BranchTableAdapter();
+        string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public Branch()
         {
@@ -38,7 +39,7 @@ namespace Kurs7PM.Администратор
 
 
             string Sql = "select * from dbo.branch";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();
@@ -51,7 +52,7 @@ namespace Kurs7PM.Администратор
             connection.Close();
 
             string Sql1 = "DROP TABLE " + name[index];
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
@@ -135,7 +136,7 @@ namespace Kurs7PM.Администратор
 
             string priem = filials.Text;
             string Sql = "CREATE TABLE " + priem + "(\tID_medication int identity(1,1) primary key,\r\n\tНазвание nvarchar(50) NOT NULL,\r\n\tКоличество int  NOT NULL,\r\n\tЦена int  NOT NULL);";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();

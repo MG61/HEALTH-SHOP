@@ -83,6 +83,12 @@
     <Compile Include="Kurs7DataSet.cs">
       <DependentUpon>Kurs7DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Авторизация\Регистрация\Provider.xaml.cs">
+      <DependentUpon>Provider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Авторизация\Регистрация\Sklad.xaml.cs">
+      <DependentUpon>Sklad.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Администратор\Administrator.xaml.cs">
       <DependentUpon>Administrator.xaml</DependentUpon>
     </Compile>
@@ -104,6 +110,17 @@
     <Compile Include="Сотрудник\Pharmacy.xaml.cs">
       <DependentUpon>Pharmacy.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Сотрудник\Zakup.xaml.cs">
+      <DependentUpon>Zakup.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Авторизация\Регистрация\Provider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Авторизация\Регистрация\Sklad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Администратор\Administrator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -160,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Сотрудник\Pharmacy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Сотрудник\Zakup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

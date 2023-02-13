@@ -10,55 +10,65 @@
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!--Кнопки навигации-->
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Background="#444444" Panel.ZIndex="1" FlowDirection ="RightToLeft" MouseDown="StackPanel_MouseDown">
-
-            <Button Style="{StaticResource buttonClose }" Click="Exit_with_application">
-                <Image Width="15" Margin="2 0 0 0" Source="/images/cross.png"/>
-            </Button>
-
-            <Button Style="{StaticResource buttonMini }" Click="Maximized_with_application" Margin="5 0 0 0">
-                <Image Width="15" Margin="2 0 0 0" Source="/images/square.png"/>
-            </Button>
-
-            <Button Style="{StaticResource buttonMini }" Click="Minimazed_with_application" Margin="5 0 0 0">
-                <Image Width="15" Margin="2 0 0 0" Source="/images/minus.png"/>
-            </Button>
-        </StackPanel>
-
-        <!--Верхняя панель-->
-        <Grid Grid.Row="1" Background="#ecf0f1">
-            
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-                <Button Click="employees" Height="40" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 100 200 0" BorderBrush="#444444" BorderThickness="2" Background="Transparent">
+            <!--Кнопки навигации-->
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Background="#444444" Panel.ZIndex="1" FlowDirection ="RightToLeft" MouseDown="StackPanel_MouseDown">
+
+                <Button Style="{StaticResource buttonClose }" Click="Exit_with_application">
+                    <Image Width="15" Margin="2 0 0 0" Source="/images/cross.png"/>
+                </Button>
+
+                <Button Style="{StaticResource buttonMini }" Click="Maximized_with_application" Margin="5 0 0 0">
+                    <Image Width="15" Margin="2 0 0 0" Source="/images/square.png"/>
+                </Button>
+
+                <Button Style="{StaticResource buttonMini }" Click="Minimazed_with_application" Margin="5 0 0 0">
+                    <Image Width="15" Margin="2 0 0 0" Source="/images/minus.png"/>
+                </Button>
+            </StackPanel>
+
+            <!--Верхняя панель-->
+            <Grid Grid.Row="1" Background="#ecf0f1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" MinHeight="630"/>
+                    <RowDefinition Height="0*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Button Click="employees" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="375,182,0,0" BorderBrush="#444444" BorderThickness="2" Background="Transparent">
                     <StackPanel VerticalAlignment="Top">
                         <TextBlock Text="Сотрудники" />
                     </StackPanel>
                 </Button>
-                <Button Click="filials" Height="40" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="200 100 0 0" BorderBrush="#444444" BorderThickness="2" Background="Transparent">
+                <Button Click="filials" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="575,182,0,0" BorderBrush="#444444" BorderThickness="2" Background="Transparent">
                     <StackPanel VerticalAlignment="Top">
                         <TextBlock Text="Филиалы"/>
                     </StackPanel>
                 </Button>
-                <Button Click="admins" Height="40" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 250 200 0" BorderBrush="#444444" BorderThickness="2" Background="Transparent">
+                <Button Click="admins" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="375,256,0,0" BorderBrush="#444444" BorderThickness="2" Background="Transparent">
+                    <StackPanel VerticalAlignment="Top">
+                        <TextBlock Text="Бухгалтеры" />
+                    </StackPanel>
+                </Button>
+                <Button Click="exit" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="575,256,0,0" BorderBrush="#444444" BorderThickness="2" Background="Transparent">
+                    <StackPanel VerticalAlignment="Top">
+                        <TextBlock Text="Поставщики"/>
+                    </StackPanel>
+                </Button>
+                <Button Click="admins" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="375,330,0,0" BorderBrush="#444444" BorderThickness="2" Background="Transparent">
                     <StackPanel VerticalAlignment="Top">
                         <TextBlock Text="Администраторы" />
                     </StackPanel>
                 </Button>
-                <Button Click="exit" Height="40" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="200 250 0 0" BorderBrush="#444444" BorderThickness="2" Background="Transparent">
+                <Button Click="exit" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="575,330,0,0" BorderBrush="#444444" BorderThickness="2" Background="Transparent">
                     <StackPanel VerticalAlignment="Top">
                         <TextBlock Text="Выход"/>
                     </StackPanel>

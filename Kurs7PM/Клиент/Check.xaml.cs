@@ -26,6 +26,7 @@ namespace Kurs7PM.Клиент
         Kurs7DataSet DataSet = new Kurs7DataSet();
         ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
         ShoppingCartHelpTableAdapter SHTA = new ShoppingCartHelpTableAdapter();
+        string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public Check()
         {
@@ -46,14 +47,14 @@ namespace Kurs7PM.Клиент
         private void authorization(object sender, RoutedEventArgs e)
         {
             string Sql1 = "Truncate table dbo.ShoppingCart";
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
             reader1.Close();
             connection1.Close();
             string Sql = "Truncate table dbo.ShoppingCartHelp";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();
@@ -147,14 +148,14 @@ namespace Kurs7PM.Клиент
             wb.Activate();
             
             string Sql1 = "Truncate table dbo.ShoppingCart";
-            SqlConnection connection1 = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
             reader1.Close();
             connection1.Close();
             string Sql = "Truncate table dbo.ShoppingCartHelp";
-            SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1KN5R8D;Initial Catalog=Kurs7;Integrated Security=True");
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
             SqlDataReader reader = command.ExecuteReader();

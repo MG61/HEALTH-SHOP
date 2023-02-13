@@ -1,8 +1,8 @@
-﻿using Kurs7PM.Клиент;
+﻿using Kurs7PM.Kurs7DataSetTableAdapters;
+using Kurs7PM.Администратор;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,39 +14,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Kurs7PM.Kurs7DataSetTableAdapters;
 
-namespace Kurs7PM.Администратор
+namespace Kurs7PM.Авторизация.Регистрация
 {
     /// <summary>
-    /// Логика взаимодействия для Employee.xaml
+    /// Логика взаимодействия для Sklad.xaml
     /// </summary>
-    public partial class Employee : Window
+    public partial class Sklad : Window
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
-        EmployeeTableAdapter ETA = new EmployeeTableAdapter();
-        BranchTableAdapter BTA = new BranchTableAdapter();
+        SkladTableAdapter STA = new SkladTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
-        public Employee()
+        public Sklad()
         {
             InitializeComponent();
-            data.ItemsSource = DataSet.Employee.DefaultView;
-            ETA.Fill(DataSet.Employee);
-            BTA.Fill(DataSet.Branch);
-
-            string Sql1 = "select Name from dbo.Branch";
-            SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
-            connection1.Open();
-            SqlCommand command1 = new SqlCommand(Sql1, connection1);
-            SqlDataReader reader1 = command1.ExecuteReader();
-            while (reader1.Read())
-            {
-                filial.Items.Add(reader1["Name"].ToString());
-            }
-
-            reader1.Close();
-            connection1.Close();
+            STA.Fill(DataSet.Sklad);
         }
 
         //Удаляет запись выбранной ячейки
@@ -55,8 +38,34 @@ namespace Kurs7PM.Администратор
             Button button = sender as Button;
             int index = Int32.Parse(button.Tag.ToString());
             int id = index + 1;
-            ETA.DeleteQuery(id);
-            ETA.Fill(DataSet.Employee);
+
+
+            string Sql = "select * from dbo.sklad";
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
+            connection.Open();
+            SqlCommand command = new SqlCommand(Sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> name = new List<string>();
+            while (reader.Read())
+            {
+                name.Add(reader["Название"].ToString());
+            }
+            reader.Close();
+            connection.Close();
+
+            string Sql1 = "DROP TABLE " + name[index];
+            SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
+            connection1.Open();
+            SqlCommand command1 = new SqlCommand(Sql1, connection1);
+            SqlDataReader reader1 = command1.ExecuteReader();
+            reader1.Close();
+            connection1.Close();
+
+            STA.DeleteQuery(id);
+            STA.Fill(DataSet.Sklad);
+
+
+
         }
 
         //Отправляет удаление в конец datagrid
@@ -76,18 +85,10 @@ namespace Kurs7PM.Администратор
         //Убирает первый столбец datagrid (id)
         private void DataGrid_OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.PropertyName == "ID_employee")
+            if (e.PropertyName == "ID_sklad")
             {
                 e.Cancel = true;
             }
-        }
-
-        //Переход к меню
-        private void menu(object sender, RoutedEventArgs e)
-        {
-            MenuAdministrator go = new MenuAdministrator();
-            go.Show();
-            Close();
         }
 
         //Позволяет перетаскивать окно
@@ -121,21 +122,33 @@ namespace Kurs7PM.Администратор
             this.WindowState = WindowState.Minimized;
         }
 
-        //Добавление сотрудника
-        private void add_employee(object sender, RoutedEventArgs e)
+        //Добавление
+        private void add_branch(object sender, RoutedEventArgs e)
         {
-            ETA.InsertQuery(login.Text, password.Text, familia.Text, name.Text, middle_name.Text, filial.Text);
-            ETA.Fill(DataSet.Employee);
+            STA.InsertQuery(filials.Text);
+            STA.Fill(DataSet.Sklad);
+
+            string priem = filials.Text;
+            string Sql = "CREATE TABLE " + priem + "(\tID_providersklad int identity(1,1) primary key,\r\n\tНазвание nvarchar(50) NOT NULL,\r\n\tКоличество int  NOT NULL,\r\n\tЦена int  NOT NULL);";
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
+            connection.Open();
+            SqlCommand command = new SqlCommand(Sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            reader.Close();
+            connection.Close();
+
+            MessageBox.Show("Вы успешно создали склад!");
+            Авторизация.Регистрация.Provider go = new Авторизация.Регистрация.Provider(priem);
+            go.Show();
+            Close();
         }
 
-        //Переход к филиалам
-        private void branch(object sender, RoutedEventArgs e)
+        //Переход
+        private void reg(object sender, RoutedEventArgs e)
         {
-            Branch go =  new Branch();
+           Авторизация.Регистрация.Provider go = new Авторизация.Регистрация.Provider("");
             go.Show();
             Close();
         }
     }
-
-
 }

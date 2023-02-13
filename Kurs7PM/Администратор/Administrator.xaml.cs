@@ -23,6 +23,7 @@ namespace Kurs7PM.Администратор
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
         AdministratorTableAdapter ATA = new AdministratorTableAdapter();
+        string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public Administrator()
         {

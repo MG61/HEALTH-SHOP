@@ -1,9 +1,7 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
-using Kurs7PM.Авторизация;
-using Kurs7PM.Клиент;
+using Kurs7PM.Администратор;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -17,58 +15,34 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Kurs7PM.Сотрудник
+namespace Kurs7PM.Авторизация.Регистрация
 {
-
-    public partial class Pharmacy : Window
+    public partial class Provider : Window
     {
-        Kurs7DataSet DataSet = new Kurs7DataSet();
-        ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
-        ShoppingCartHelpTableAdapter SHTA = new ShoppingCartHelpTableAdapter();
-        medicationTableAdapter MTA = new medicationTableAdapter();
-        string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
-        public Pharmacy(string address)
+        Kurs7DataSet DataSet = new Kurs7DataSet();
+        ProviderTableAdapter PTA = new ProviderTableAdapter();
+        SkladTableAdapter STA = new SkladTableAdapter();
+
+        public Provider(string sklada)
         {
             InitializeComponent();
 
-            addressap.Text = address;
+            PTA.Fill(DataSet.Provider);
+            STA.Fill(DataSet.Sklad);
 
-            string Sql = "select * from " + address;
-            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
-            connection.Open();
-            SqlDataAdapter command = new SqlDataAdapter(Sql, connection);
-            DataSet ds = new DataSet();
-            command.Fill(ds, address);
-            connection.Close();
-
-            data.ItemsSource = ds.Tables[address].DefaultView; ;
+            if (0 != DataSet.Sklad.Rows.Count)
+            {
+                sklad.Items.Add(sklada);
+            }
         }
 
-
-        //Переход к окну авторизации
-        private void authorization(object sender, RoutedEventArgs e)
+        //Переход к меню
+        private void auth(object sender, RoutedEventArgs e)
         {
             MainWindow go = new MainWindow();
             go.Show();
             Close();
-        }
-
-        //Переход к окну корзины
-        private void provider_buy(object sender, RoutedEventArgs e)
-        {
-            Zakup go = new Zakup(addressap.Text);
-            go.Show();
-            Close();
-        }
-
-        //Убирает первый столбец id
-        private void DataGrid_OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            if (e.PropertyName == "ID_medication")
-            {
-                e.Cancel = true;
-            }
         }
 
         //Позволяет перетаскивать окно
@@ -101,5 +75,25 @@ namespace Kurs7PM.Сотрудник
         {
             this.WindowState = WindowState.Minimized;
         }
+
+        //Добавление поставщика
+        private void add_Provider(object sender, RoutedEventArgs e)
+        {
+            PTA.InsertQuery(login.Text, password.Text, familia.Text, name.Text, middle_name.Text, sklad.Text);
+            PTA.Fill(DataSet.Provider);
+            MessageBox.Show("Вы успешно зарегистрированы!");
+            MainWindow go = new MainWindow();
+            go.Show();
+            Close();
+        }
+
+        //Переход
+        private void sklad11(object sender, RoutedEventArgs e)
+        {
+            Sklad go = new Sklad();
+            go.Show();
+            Close();
+        }
+
     }
 }
