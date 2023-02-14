@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Kurs7PM.API.Models;
 
 namespace Kurs7PM.Авторизация.Регистрация
 {
@@ -22,29 +25,78 @@ namespace Kurs7PM.Авторизация.Регистрация
     /// </summary>
     public partial class Client : Window
     {
-
-        string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
+        HttpClient client = new HttpClient();
+        //string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public Client()
         {
             InitializeComponent();
+            client.BaseAddress = new Uri("https://localhost:7005/api/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json")
+                );
+
+            GetClient();
+        }
+
+        private async void GetClient()
+        {
+            var responce = await client.GetStringAsync("client");
+            var clients = JsonConvert.DeserializeObject<List<Kurs7PM.API.Models.Client>>(responce);
+            //data.DataContext = clients;
+        }
+
+        private async void SaveClient(Kurs7PM.API.Models.Client client1)
+        {
+            await client.PostAsJsonAsync("client", client1);
+        }
+
+        private async void UpdateClient(Kurs7PM.API.Models.Client client1)
+        {
+            await client.PostAsJsonAsync("client/" + client1.ID_client, client1);
+        }
+
+        private async void DeleteClient(int clientID)
+        {
+            await client.DeleteAsync("client" + clientID);
         }
 
         //Добавление клиента
         private void add_Provider(object sender, RoutedEventArgs e)
         {
-            string Sql5 = "INSERT INTO dbo.Client" + " VALUES (" + "'" + login.Text + "'" + ", " + "'" + password.Text + "'" + ", " + "'" + familia.Text + "'" + ", " + "'" + name.Text + "'" + ", " + "'" + middle_name.Text + "');";
-            SqlConnection connection5 = new SqlConnection(Kurs7ConnectionString);
-            connection5.Open();
-            SqlCommand command5 = new SqlCommand();
-            command5.CommandText = Sql5;
-            command5.Connection = connection5;
-            command5.ExecuteNonQuery();
-            connection5.Close();
+            //string Sql5 = "INSERT INTO dbo.Client" + " VALUES (" + "'" + login.Text + "'" + ", " + "'" + password.Text + "'" + ", " + "'" + familia.Text + "'" + ", " + "'" + name.Text + "'" + ", " + "'" + middle_name.Text + "');";
+            //SqlConnection connection5 = new SqlConnection(Kurs7ConnectionString);
+            //connection5.Open();
+            //SqlCommand command5 = new SqlCommand();
+            //command5.CommandText = Sql5;
+            //command5.Connection = connection5;
+            //command5.ExecuteNonQuery();
+            //connection5.Close();
+
+
+            var client = new Kurs7PM.API.Models.Client()
+            {
+                Логин = login.Text,
+
+                Пароль = password.Text,
+
+                Фамилия = familia.Text,
+
+                Имя = name.Text,
+
+                Отчество = name.Text
+            };
+
+            this.SaveClient(client);
+            GetClient();
+
             MessageBox.Show("Вы успешно зарегистрированы!");
-            MainWindow go = new MainWindow();
-            go.Show();
-            Close();
+            //MainWindow go = new MainWindow();
+            //go.Show();
+            //Close();
+
+
         }
 
 

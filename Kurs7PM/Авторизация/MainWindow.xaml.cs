@@ -36,7 +36,7 @@ namespace Kurs7PM.Авторизация
         AdministratorTableAdapter ATA = new AdministratorTableAdapter();
         EmployeeTableAdapter ETA = new EmployeeTableAdapter();
         ProviderTableAdapter PTA = new ProviderTableAdapter();
-        ClientTableAdapter CTA = new ClientTableAdapter();
+        ClientsTableAdapter CTA = new ClientsTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public MainWindow()
@@ -45,7 +45,7 @@ namespace Kurs7PM.Авторизация
             ATA.Fill(DataSet.Administrator);
             ETA.Fill(DataSet.Employee);
             PTA.Fill(DataSet.Provider);
-            CTA.Fill(DataSet.Client);
+            CTA.Fill(DataSet.Clients);
 
             if (0 == DataSet.Administrator.Rows.Count)
             {
@@ -210,9 +210,9 @@ namespace Kurs7PM.Авторизация
         {
             try
             {
-                for (int i = 0; i < DataSet.Client.Rows.Count; i++)
+                for (int i = 0; i < DataSet.Clients.Rows.Count; i++)
                 {
-                    if (custlog == DataSet.Client.Rows[i][1].ToString() && custpass == DataSet.Client.Rows[i][2].ToString())
+                    if (custlog == DataSet.Clients.Rows[i][1].ToString() && custpass == DataSet.Clients.Rows[i][2].ToString())
                     {
                         prov = 1;
                         Store da1 = new Store();

@@ -1,0 +1,7 @@
+        Получение клиентов
+        private async void GetClient()
+        {
+            var responce = await client.GetStringAsync("clients");
+            var clients = JsonConvert.DeserializeObject<List<Client>>(responce);
+            data.DataContext = clients;
+        }
