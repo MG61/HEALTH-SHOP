@@ -33,10 +33,7 @@ namespace Kurs7PM.Авторизация.Регистрация
             InitializeComponent();
             client.BaseAddress = new Uri("https://localhost:7005/api/");
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json")
-                );
-
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             GetClient();
         }
 
@@ -65,16 +62,6 @@ namespace Kurs7PM.Авторизация.Регистрация
         //Добавление клиента
         private void add_Provider(object sender, RoutedEventArgs e)
         {
-            //string Sql5 = "INSERT INTO dbo.Client" + " VALUES (" + "'" + login.Text + "'" + ", " + "'" + password.Text + "'" + ", " + "'" + familia.Text + "'" + ", " + "'" + name.Text + "'" + ", " + "'" + middle_name.Text + "');";
-            //SqlConnection connection5 = new SqlConnection(Kurs7ConnectionString);
-            //connection5.Open();
-            //SqlCommand command5 = new SqlCommand();
-            //command5.CommandText = Sql5;
-            //command5.Connection = connection5;
-            //command5.ExecuteNonQuery();
-            //connection5.Close();
-
-
             var client = new Kurs7PM.API.Models.Client()
             {
                 Логин = login.Text,
@@ -85,20 +72,19 @@ namespace Kurs7PM.Авторизация.Регистрация
 
                 Имя = name.Text,
 
-                Отчество = name.Text
+                Отчество = middle_name.Text
             };
+
+            login.Text = "";
+            password.Text = "";
+            familia.Text = "";
+            name.Text = ""; 
+            middle_name.Text = "";
 
             this.SaveClient(client);
             GetClient();
-
             MessageBox.Show("Вы успешно зарегистрированы!");
-            //MainWindow go = new MainWindow();
-            //go.Show();
-            //Close();
-
-
         }
-
 
         //Переход к меню
         private void auth(object sender, RoutedEventArgs e)
