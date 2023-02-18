@@ -1,22 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Net.Http;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Kurs7PM.API.Models;
 
 namespace Kurs7PM.Авторизация.Регистрация
 {
@@ -51,7 +38,7 @@ namespace Kurs7PM.Авторизация.Регистрация
         //Обновление записи
         private async void UpdateClient(Kurs7PM.API.Models.Client client1)
         {
-            await client.PostAsJsonAsync("client/" + client1.ID_client, client1);
+            await client.PutAsJsonAsync("client/" + client1.ID_client, client1);
         }
 
         //Удаление записи
@@ -79,7 +66,7 @@ namespace Kurs7PM.Авторизация.Регистрация
             login.Text = "";
             password.Text = "";
             familia.Text = "";
-            name.Text = ""; 
+            name.Text = "";
             middle_name.Text = "";
 
             this.SaveClient(client);

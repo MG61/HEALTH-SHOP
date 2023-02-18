@@ -2,28 +2,14 @@
 using Kurs7PM.Авторизация.Регистрация;
 using Kurs7PM.Администратор;
 using Kurs7PM.Клиент;
-using Kurs7PM.Поставщик;
 using Kurs7PM.Сотрудник;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Kurs7PM.Авторизация
 {
@@ -94,7 +80,7 @@ namespace Kurs7PM.Авторизация
             ProviderAuth(log, pass);
             ClientAuth(log, pass);
         }
-        
+
         int nepov = 0;
         int prov = 1;
 
@@ -113,12 +99,12 @@ namespace Kurs7PM.Авторизация
                             go.Show();
                             Close();
                         }
-                        
+
                         nepov = 1;
                     }
-                    else if(prov == 0)
+                    else if (prov == 0)
                     {
-                       MessageBox.Show("Введите данные!");
+                        MessageBox.Show("Введите данные!");
                     }
                 }
             }
@@ -135,7 +121,7 @@ namespace Kurs7PM.Авторизация
             {
                 for (int i = 0; i < DataSet.Employee.Rows.Count; i++)
                 {
-                    if (sotrlog == DataSet.Employee.Rows[i][1].ToString() && sotrpass == DataSet.Employee.Rows[i][2].ToString())
+                    if (sotrlog == DataSet.Employee.Rows[i][1].ToString() && GetHash(sotrpass) == DataSet.Employee.Rows[i][2].ToString())
                     {
                         prov = 1;
                         string Sql = "select * from dbo.Employee";
@@ -229,6 +215,15 @@ namespace Kurs7PM.Авторизация
             {
                 return;
             }
+        }
+
+        //Хэширование
+        public string GetHash(string pass)
+        {
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(pass));
+
+            return Convert.ToBase64String(hash);
         }
 
 

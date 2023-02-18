@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Kurs7PM.Kurs7DataSetTableAdapters;
+using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Drawing;
-using System.Data;
 using Excel = Microsoft.Office.Interop.Excel;
-using Kurs7PM.Kurs7DataSetTableAdapters;
-using System.Data.SqlClient;
-using System.Reflection;
 
 namespace Kurs7PM.Клиент
 {
@@ -37,7 +26,7 @@ namespace Kurs7PM.Клиент
             int sum = 0;
             foreach (DataRowView row in data.ItemsSource)
             {
-                sum += (int)row["Цена"];
+                sum += Int32.Parse(row["Цена"].ToString());
             }
             summ.Text = sum.ToString();
         }
@@ -144,8 +133,8 @@ namespace Kurs7PM.Клиент
 
             excel.Visible = true;
             wb.Activate();
-            
-            string Sql1 = "Truncate table dbo.ShoppingCart";
+
+            string Sql1 = "Truncate table dbo.ShoppingCarts";
             SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
@@ -158,7 +147,7 @@ namespace Kurs7PM.Клиент
             int sum = 0;
             foreach (DataRowView row in data.ItemsSource)
             {
-                sum += (int)row["Цена"];
+                sum += Int32.Parse(row["Цена"].ToString());
             }
             summ.Text = sum.ToString();
 

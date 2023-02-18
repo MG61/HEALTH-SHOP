@@ -87,6 +87,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="API\Models\Client.cs" />
+    <Compile Include="API\Models\Provider.cs" />
+    <Compile Include="API\Models\ShoppingCart.cs" />
     <Compile Include="Kurs7DataSet.cs">
       <DependentUpon>Kurs7DataSet.xsd</DependentUpon>
     </Compile>

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-
-namespace Kurs7PM.API.Models
+﻿namespace Kurs7PM.API.Models
 {
     internal class ShoppingCart
     {

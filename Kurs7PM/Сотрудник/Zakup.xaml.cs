@@ -1,22 +1,10 @@
-﻿using Kurs7PM.Авторизация;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Diagnostics;
-using Kurs7PM.Администратор;
-using System.Collections;
 
 namespace Kurs7PM.Сотрудник
 {
@@ -53,14 +41,14 @@ namespace Kurs7PM.Сотрудник
         {
             sklad = (sender as ComboBox).SelectedItem as string;
 
-                string Sql = "select * from " + sklad;
-                SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
-                connection.Open();
-                SqlDataAdapter command = new SqlDataAdapter(Sql, connection);
-                DataSet ds = new DataSet();
-                command.Fill(ds, sklad);
-                connection.Close();
-                data.ItemsSource = ds.Tables[sklad].DefaultView;
+            string Sql = "select * from " + sklad;
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
+            connection.Open();
+            SqlDataAdapter command = new SqlDataAdapter(Sql, connection);
+            DataSet ds = new DataSet();
+            command.Fill(ds, sklad);
+            connection.Close();
+            data.ItemsSource = ds.Tables[sklad].DefaultView;
 
         }
 
@@ -81,9 +69,9 @@ namespace Kurs7PM.Сотрудник
         //Переход к окну авторизации
         private void authorization(object sender, RoutedEventArgs e)
         {
-           Pharmacy go = new Pharmacy(addressap.Text);
-           go.Show();
-           Close();
+            Pharmacy go = new Pharmacy(addressap.Text);
+            go.Show();
+            Close();
         }
 
         //Убирает первый столбец id
@@ -148,8 +136,8 @@ namespace Kurs7PM.Сотрудник
                 price4.Add(reader4["Цена"].ToString());
             }
             reader4.Close();
-            connection4.Close(); 
-            
+            connection4.Close();
+
             int pribavquantity = Int32.Parse(quantity4[index]);
             pribavquantity--;
 
@@ -192,7 +180,7 @@ namespace Kurs7PM.Сотрудник
                 quantity3.Add(reader3["Количество"].ToString());
             }
             reader3.Close();
-            
+
             connection3.Close();
 
             int temp = 2;
@@ -213,12 +201,12 @@ namespace Kurs7PM.Сотрудник
             reader6.Close();
             connection6.Close();
 
-           
+
 
 
             if (temp == 1)
-            {            
-                int quan = Int32.Parse(quantitycompany.ToString());;
+            {
+                int quan = Int32.Parse(quantitycompany.ToString()); ;
                 quan++;
                 string Sql1 = "UPDATE " + addressap.Text + " SET Количество = " + quan + "WHERE Название=" + "'" + names4[index] + "';";
                 SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
@@ -229,7 +217,7 @@ namespace Kurs7PM.Сотрудник
                 command1.ExecuteNonQuery();
                 connection1.Close();
             }
-            else if(temp==2)
+            else if (temp == 2)
             {
                 string Sql5 = "INSERT INTO " + addressap.Text + " (Название, Количество, Цена)" + " VALUES (" + "'" + names4[index] + "'" + ", " + 1 + ", " + price4[index] + ");";
                 SqlConnection connection5 = new SqlConnection(Kurs7ConnectionString);

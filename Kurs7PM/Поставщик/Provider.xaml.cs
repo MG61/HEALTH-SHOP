@@ -1,23 +1,11 @@
-﻿using Kurs7PM.Авторизация;
-using Kurs7PM.Клиент;
+﻿using Kurs7PM.Kurs7DataSetTableAdapters;
+using Kurs7PM.Авторизация;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Kurs7PM.Kurs7DataSetTableAdapters;
-using Kurs7PM.Авторизация.Регистрация;
 
 namespace Kurs7PM.Поставщик
 {
@@ -141,12 +129,12 @@ namespace Kurs7PM.Поставщик
 
         private void add_sklad(object sender, RoutedEventArgs e)
         {
-            string Sql = "INSERT INTO " + allsklad + " (Название, Количество, Цена)" + " VALUES (" + "'" +name.Text + "'" + ", " + quantity.Text + ", " + price.Text + ");";
+            string Sql = "INSERT INTO " + allsklad + " (Название, Количество, Цена)" + " VALUES (" + "'" + name.Text + "'" + ", " + quantity.Text + ", " + price.Text + ");";
             SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
             connection.Open();
             SqlCommand command = new SqlCommand();
             command.CommandText = Sql;
-            command.Connection= connection;
+            command.Connection = connection;
             command.ExecuteNonQuery();
             connection.Close();
 

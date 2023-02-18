@@ -1,19 +1,10 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
-using Kurs7PM.Администратор;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Kurs7PM.Авторизация.Регистрация
 {
@@ -139,7 +130,7 @@ namespace Kurs7PM.Авторизация.Регистрация
         //Переход
         private void reg(object sender, RoutedEventArgs e)
         {
-           Авторизация.Регистрация.Provider go = new Авторизация.Регистрация.Provider("");
+            Авторизация.Регистрация.Provider go = new Авторизация.Регистрация.Provider("");
             go.Show();
             Close();
         }

@@ -1,20 +1,11 @@
-﻿using Kurs7PM.Клиент;
+﻿using Kurs7PM.Kurs7DataSetTableAdapters;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Kurs7PM.Kurs7DataSetTableAdapters;
 
 namespace Kurs7PM.Администратор
 {
@@ -57,6 +48,15 @@ namespace Kurs7PM.Администратор
             int id = index + 1;
             ETA.DeleteQuery(id);
             ETA.Fill(DataSet.Employee);
+        }
+
+        //Хэширование
+        public string GetHash(string pass)
+        {
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(pass));
+
+            return Convert.ToBase64String(hash);
         }
 
         //Отправляет удаление в конец datagrid
@@ -124,14 +124,14 @@ namespace Kurs7PM.Администратор
         //Добавление сотрудника
         private void add_employee(object sender, RoutedEventArgs e)
         {
-            ETA.InsertQuery(login.Text, password.Text, familia.Text, name.Text, middle_name.Text, filial.Text);
+            ETA.InsertQuery(login.Text, GetHash(password.Text), familia.Text, name.Text, middle_name.Text, filial.Text);
             ETA.Fill(DataSet.Employee);
         }
 
         //Переход к филиалам
         private void branch(object sender, RoutedEventArgs e)
         {
-            Branch go =  new Branch();
+            Branch go = new Branch();
             go.Show();
             Close();
         }

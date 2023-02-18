@@ -1,22 +1,12 @@
-﻿using System;
+﻿using Kurs7PM.Kurs7DataSetTableAdapters;
+using Kurs7PM.Авторизация;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Kurs7PM.Kurs7DataSetTableAdapters;
-using Kurs7PM.Авторизация;
-using Kurs7PM.Администратор;
 
 namespace Kurs7PM.Клиент
 {
@@ -58,7 +48,7 @@ namespace Kurs7PM.Клиент
             DataSet ds = new DataSet();
             command.Fill(ds, sklad);
             connection.Close();
-            data.ItemsSource = ds.Tables[sklad].DefaultView; 
+            data.ItemsSource = ds.Tables[sklad].DefaultView;
 
         }
 
@@ -86,22 +76,7 @@ namespace Kurs7PM.Клиент
             reader.Close();
             connection.Close();
 
-            //  Отнимаем у магазина
-            int pribavquantity = Int32.Parse(quantity[index]);
-            pribavquantity--;
 
-            //Если товар есть, то отнимает количество
-            if (pribavquantity >= 1)
-            {
-                string Sql1 = "UPDATE " + sklad + " SET Количество = " + pribavquantity + "WHERE Название=" + "'" + names[index] + "';";
-                SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
-                connection1.Open();
-                SqlCommand command1 = new SqlCommand();
-                command1.CommandText = Sql1;
-                command1.Connection = connection1;
-                command1.ExecuteNonQuery();
-                connection1.Close();
-            }
 
             //Проверка на уже существующие записи
             string Sql3 = "select * from dbo.ShoppingCarts";
@@ -140,14 +115,19 @@ namespace Kurs7PM.Клиент
             reader6.Close();
             connection6.Close();
 
-            if (temp == 1)
+
+            //  Отнимаем у магазина
+            int pribavquantity = Int32.Parse(quantity[index]);
+            pribavquantity--;
+
+            if (pribavquantity <= 0)
             {
-                int quan = Int32.Parse(quantitycompany.ToString()); 
-                quan++;
-                int pod = Int32.Parse(podchet.ToString());
-                int podind = Int32.Parse(price[index].ToString());
-                pod += podind;
-                string Sql1 = "UPDATE dbo.ShoppingCarts" + " SET Количество = " + quan + ", Цена = " + pod + " WHERE Название=" + "'" + names[index] + "';";
+                MessageBox.Show("Товар закончился!");
+            }
+            //Если товар есть, то отнимает количество
+            else if (pribavquantity > 0)
+            {
+                string Sql1 = "UPDATE " + sklad + " SET Количество = " + pribavquantity + "WHERE Название=" + "'" + names[index] + "';";
                 SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
                 connection1.Open();
                 SqlCommand command1 = new SqlCommand();
@@ -155,17 +135,35 @@ namespace Kurs7PM.Клиент
                 command1.Connection = connection1;
                 command1.ExecuteNonQuery();
                 connection1.Close();
-            }
-            else if (temp == 2)
-            {
-                string Sql5 = "INSERT INTO dbo.ShoppingCarts" + " (Название, Количество, Цена)" + " VALUES (" + "'" + names[index] + "'" + ", " + 1 + ", " + price[index] + ");";
-                SqlConnection connection5 = new SqlConnection(Kurs7ConnectionString);
-                connection5.Open();
-                SqlCommand command5 = new SqlCommand();
-                command5.CommandText = Sql5;
-                command5.Connection = connection5;
-                command5.ExecuteNonQuery();
-                connection5.Close();
+
+
+                if (temp == 1)
+                {
+                    int quan = Int32.Parse(quantitycompany.ToString());
+                    quan++;
+                    int pod = Int32.Parse(podchet.ToString());
+                    int podind = Int32.Parse(price[index].ToString());
+                    pod += podind;
+                    string Sql2 = "UPDATE dbo.ShoppingCarts" + " SET Количество = " + quan + ", Цена = " + pod + " WHERE Название=" + "'" + names[index] + "';";
+                    SqlConnection connection2 = new SqlConnection(Kurs7ConnectionString);
+                    connection2.Open();
+                    SqlCommand command2 = new SqlCommand();
+                    command2.CommandText = Sql2;
+                    command2.Connection = connection2;
+                    command2.ExecuteNonQuery();
+                    connection2.Close();
+                }
+                else if (temp == 2)
+                {
+                    string Sql5 = "INSERT INTO dbo.ShoppingCarts" + " (Название, Количество, Цена)" + " VALUES (" + "'" + names[index] + "'" + ", " + 1 + ", " + price[index] + ");";
+                    SqlConnection connection5 = new SqlConnection(Kurs7ConnectionString);
+                    connection5.Open();
+                    SqlCommand command5 = new SqlCommand();
+                    command5.CommandText = Sql5;
+                    command5.Connection = connection5;
+                    command5.ExecuteNonQuery();
+                    connection5.Close();
+                }
             }
 
             temp = 2;
