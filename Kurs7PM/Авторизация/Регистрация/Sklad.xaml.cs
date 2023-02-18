@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace Kurs7PM.Авторизация.Регистрация
 {
-    /// <summary>
-    /// Логика взаимодействия для Sklad.xaml
-    /// </summary>
     public partial class Sklad : Window
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
@@ -38,7 +35,6 @@ namespace Kurs7PM.Авторизация.Регистрация
             Button button = sender as Button;
             int index = Int32.Parse(button.Tag.ToString());
             int id = index + 1;
-
 
             string Sql = "select * from dbo.sklad";
             SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
@@ -63,9 +59,6 @@ namespace Kurs7PM.Авторизация.Регистрация
 
             STA.DeleteQuery(id);
             STA.Fill(DataSet.Sklad);
-
-
-
         }
 
         //Отправляет удаление в конец datagrid

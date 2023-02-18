@@ -23,7 +23,7 @@ namespace Kurs7PM.Сотрудник
     public partial class Pharmacy : Window
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
-        ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
+        ShoppingCartsTableAdapter STA = new ShoppingCartsTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public Pharmacy(string address)

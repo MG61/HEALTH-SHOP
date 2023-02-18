@@ -8,6 +8,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Configuration;
+using Kurs7PM.API.Models;
+using System.Net.Http;
+
 
 namespace Kurs7PM.Клиент
 {
@@ -15,24 +18,31 @@ namespace Kurs7PM.Клиент
     public partial class ShoppingCart : Window
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
-        ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
+        ShoppingCartsTableAdapter STA = new ShoppingCartsTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
+        HttpClient client = new HttpClient();
 
         string medicine;
         public ShoppingCart(string name_medicine)
         {
             InitializeComponent();
-            data.ItemsSource = DataSet.ShoppingCart.DefaultView;
-            STA.Fill(DataSet.ShoppingCart);
+            data.ItemsSource = DataSet.ShoppingCarts.DefaultView;
+            STA.Fill(DataSet.ShoppingCarts);
+
+            client.BaseAddress = new Uri("https://localhost:7005/api/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
 
             medicine = name_medicine;
 
-            //Подсчёт суммы
-            int sum = 0;
-            foreach(DataRowView row in data.ItemsSource) { 
-                sum += (int)row["Цена"];
-            }
-            summ.Text = sum.ToString();
+            ////Подсчёт суммы
+            //int sum = 0;
+            //foreach (DataRowView row in data.ItemsSource)
+            //{
+            //    sum += (int)row["Цена"];
+            //}
+            //summ.Text = sum.ToString();
         }
 
         //Увеличивает количество товара
@@ -42,9 +52,9 @@ namespace Kurs7PM.Клиент
             int index = Int32.Parse(button.Tag.ToString());
             int pomindex = index + 1;
 
-            STA.Fill(DataSet.ShoppingCart);
+            STA.Fill(DataSet.ShoppingCarts);
 
-            string Sql = "select * from dbo.ShoppingCart";
+            string Sql = "select * from dbo.ShoppingCarts";
             SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
             connection.Open();
             SqlCommand command = new SqlCommand(Sql, connection);
@@ -91,7 +101,7 @@ namespace Kurs7PM.Клиент
             int pod = Int32.Parse(podchet.ToString()) * pribavquantity;
 
             //Прибавляем количество
-            string Sql4 = "UPDATE dbo.ShoppingCart SET Количество = " + pribavquantity + ", Цена = " + pod + " WHERE Название=" + "'" + names[index] + "';";
+            string Sql4 = "UPDATE dbo.ShoppingCarts SET Количество = " + pribavquantity + ", Цена = " + pod + " WHERE Название=" + "'" + names[index] + "';";
             SqlConnection connection4 = new SqlConnection(Kurs7ConnectionString);
             connection4.Open();
             SqlCommand command4 = new SqlCommand();
@@ -126,7 +136,7 @@ namespace Kurs7PM.Клиент
 
 
                 //Если товар есть, то отнимает количество
-             if (pribavquantity1 >= 1)
+            if (pribavquantity1 >= 1)
             {
                 string Sql1 = "UPDATE " + medicine + " SET Количество = " + pribavquantity1 + " WHERE Название=" + "'" + names3[index] + "';";
                 SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
@@ -143,15 +153,15 @@ namespace Kurs7PM.Клиент
                 MessageBox.Show("Товар закончился!");
             }
 
-            STA.Fill(DataSet.ShoppingCart);
+            STA.Fill(DataSet.ShoppingCarts);
 
-            //Подсчёт суммы
-            int sum = 0;
-            foreach (DataRowView row in data.ItemsSource)
-            {
-                sum += (int)row["Цена"];
-            }
-            summ.Text = sum.ToString();
+            ////Подсчёт суммы
+            //int sum = 0;
+            //foreach (DataRowView row in data.ItemsSource)
+            //{
+            //    sum += (int)row["Цена"];
+            //}
+            //summ.Text = sum.ToString();
         }
 
         //Уменьшает количество товара
@@ -162,7 +172,7 @@ namespace Kurs7PM.Клиент
             int pomindex = index + 1;
 
             //Переменная с таблицей корзины
-            string shop = "dbo.ShoppingCart";
+            string shop = "dbo.ShoppingCarts";
 
             //Вывод таблицы с препаратами
             string Sql = "select * from " + medicine;
@@ -235,59 +245,69 @@ namespace Kurs7PM.Клиент
 
             int quanminus = Int32.Parse(quantity3[index].ToString());
             quanminus--;
+
             int pod = Int32.Parse(podchet.ToString()) * quanminus;
-            string Sql1 = "UPDATE dbo.ShoppingCart" + " SET Количество = " + quanminus + ", Цена = " + pod + " WHERE Название=" + "'" + names3[index] + "';";
-            SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
-            connection1.Open();
-            SqlCommand command1 = new SqlCommand();
-            command1.CommandText = Sql1;
-            command1.Connection = connection1;
-            command1.ExecuteNonQuery();
-            connection1.Close();
+            //string Sql1 = "UPDATE dbo.ShoppingCart" + " SET Количество = " + quanminus + ", Цена = " + pod + " WHERE Название=" + "'" + names3[index] + "';";
+            //SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
+            //connection1.Open();
+            //SqlCommand command1 = new SqlCommand();
+            //command1.CommandText = Sql1;
+            //command1.Connection = connection1;
+            //command1.ExecuteNonQuery();
+            //connection1.Close();
 
+            var shoppingcart = new Kurs7PM.API.Models.ShoppingCart()
+            {
+                Название = "'" + quanminus + "'",
 
+                Количество = "'" + pod + "'",
 
-                //Если товара нет, то удаляет его
-                if (quanminus == 0)
+                Цена = "'" + price3[index] + "'"
+            };
+            this.Update(shoppingcart);
+
+            //Если товара нет, то удаляет его
+            if (quanminus == 0)
                 {
-                    string Sql10 = "DELETE  FROM " + shop + " WHERE Название=" + "'" + names3[index] + "';";
-                    SqlConnection connection10 = new SqlConnection(Kurs7ConnectionString);
-                    connection10.Open();
-                    SqlCommand command10 = new SqlCommand(Sql10, connection10);
-                    SqlDataReader reader10 = command10.ExecuteReader();
-                    reader10.Close();
-                    connection10.Close();
+                    //string Sql10 = "DELETE  FROM " + shop + " WHERE Название=" + "'" + names3[index] + "';";
+                    //SqlConnection connection10 = new SqlConnection(Kurs7ConnectionString);
+                    //connection10.Open();
+                    //SqlCommand command10 = new SqlCommand(Sql10, connection10);
+                    //SqlDataReader reader10 = command10.ExecuteReader();
+                    //reader10.Close();
+                    //connection10.Close();
+                    Delete(pomindex);
                 }
 
-            STA.Fill(DataSet.ShoppingCart);
+            STA.Fill(DataSet.ShoppingCarts);
 
-            //Подсчёт суммы
-            int sum = 0;
-            foreach (DataRowView row in data.ItemsSource)
-            {
-                sum += (int)row["Цена"];
-            }
-            summ.Text = sum.ToString();
+            ////Подсчёт суммы
+            //int sum = 0;
+            //foreach (DataRowView row in data.ItemsSource)
+            //{
+            //    sum += (int)row["Цена"];
+            //}
+            //summ.Text = sum.ToString();
         }
 
         //Удаляет все данные из корзины
         private void delete_korz(object sender, RoutedEventArgs e)
         {
-            string Sql1 = "Truncate table dbo.ShoppingCart";
+            string Sql1 = "Truncate table dbo.ShoppingCarts";
             SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
             reader1.Close();
             connection1.Close();
-            STA.Fill(DataSet.ShoppingCart);
-            //Подсчёт суммы
-            int sum = 0;
-            foreach (DataRowView row in data.ItemsSource)
-            {
-                sum += (int)row["Цена"];
-            }
-            summ.Text = sum.ToString();
+            STA.Fill(DataSet.ShoppingCarts);
+            ////Подсчёт суммы
+            //int sum = 0;
+            //foreach (DataRowView row in data.ItemsSource)
+            //{
+            //    sum += (int)row["Цена"];
+            //}
+            //summ.Text = sum.ToString();
         }
 
         //Отправляет корзину в конец datagrid
@@ -367,6 +387,17 @@ namespace Kurs7PM.Клиент
         private void Minimazed_with_application(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private async void Update(Kurs7PM.API.Models.ShoppingCart client1)
+        {
+            await client.PostAsJsonAsync("shoppingcart/" + client1.ID_cart, client1);
+        }
+
+        //Удаление записи
+        private async void Delete(int clientID)
+        {
+            await client.DeleteAsync("shoppingcart" + clientID);
         }
     }
 }

@@ -20,9 +20,6 @@ using Kurs7PM.API.Models;
 
 namespace Kurs7PM.Авторизация.Регистрация
 {
-    /// <summary>
-    /// Логика взаимодействия для Client.xaml
-    /// </summary>
     public partial class Client : Window
     {
         HttpClient client = new HttpClient();
@@ -37,6 +34,7 @@ namespace Kurs7PM.Авторизация.Регистрация
             GetClient();
         }
 
+        //Получение всех данных
         private async void GetClient()
         {
             var responce = await client.GetStringAsync("client");
@@ -44,16 +42,19 @@ namespace Kurs7PM.Авторизация.Регистрация
             //data.DataContext = clients;
         }
 
+        //Создание записи
         private async void SaveClient(Kurs7PM.API.Models.Client client1)
         {
             await client.PostAsJsonAsync("client", client1);
         }
 
+        //Обновление записи
         private async void UpdateClient(Kurs7PM.API.Models.Client client1)
         {
             await client.PostAsJsonAsync("client/" + client1.ID_client, client1);
         }
 
+        //Удаление записи
         private async void DeleteClient(int clientID)
         {
             await client.DeleteAsync("client" + clientID);

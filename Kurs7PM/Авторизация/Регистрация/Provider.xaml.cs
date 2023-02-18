@@ -1,9 +1,11 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
 using Kurs7PM.Администратор;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,21 +22,44 @@ namespace Kurs7PM.Авторизация.Регистрация
     public partial class Provider : Window
     {
 
-        Kurs7DataSet DataSet = new Kurs7DataSet();
-        ProviderTableAdapter PTA = new ProviderTableAdapter();
-        SkladTableAdapter STA = new SkladTableAdapter();
+        HttpClient client = new HttpClient();
 
         public Provider(string sklada)
         {
             InitializeComponent();
 
-            PTA.Fill(DataSet.Provider);
-            STA.Fill(DataSet.Sklad);
+            client.BaseAddress = new Uri("https://localhost:7005/api/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            if (0 != DataSet.Sklad.Rows.Count)
-            {
-                sklad.Items.Add(sklada);
-            }
+            Get();
+            sklad.Items.Add(sklada);
+        }
+
+        //Получение всех данных
+        private async void Get()
+        {
+            var responce = await client.GetStringAsync("provider");
+            var providers = JsonConvert.DeserializeObject<List<Kurs7PM.API.Models.Provider>>(responce);
+            //data.DataContext = clients;
+        }
+
+        //Создание записи
+        private async void Save(Kurs7PM.API.Models.Provider client1)
+        {
+            await client.PostAsJsonAsync("provider", client1);
+        }
+
+        //Обновление записи
+        private async void Update(Kurs7PM.API.Models.Provider client1)
+        {
+            await client.PostAsJsonAsync("provider/" + client1.ID_provider, client1);
+        }
+
+        //Удаление записи
+        private async void Delete(int ProviderID)
+        {
+            await client.DeleteAsync("provider" + ProviderID);
         }
 
         //Переход к меню
@@ -79,12 +104,30 @@ namespace Kurs7PM.Авторизация.Регистрация
         //Добавление поставщика
         private void add_Provider(object sender, RoutedEventArgs e)
         {
-            PTA.InsertQuery(login.Text, password.Text, familia.Text, name.Text, middle_name.Text, sklad.Text);
-            PTA.Fill(DataSet.Provider);
+            var provider = new Kurs7PM.API.Models.Provider()
+            {
+                Логин = login.Text,
+
+                Пароль = password.Text,
+
+                Фамилия = familia.Text,
+
+                Имя = name.Text,
+
+                Отчество = middle_name.Text,
+
+                Склад = sklad.Text
+            };
+
+            login.Text = "";
+            password.Text = "";
+            familia.Text = "";
+            name.Text = "";
+            middle_name.Text = "";
+            sklad.Text = "";
+            this.Save(provider);
+            Get();
             MessageBox.Show("Вы успешно зарегистрированы!");
-            MainWindow go = new MainWindow();
-            go.Show();
-            Close();
         }
 
         //Переход

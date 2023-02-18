@@ -23,13 +23,13 @@ namespace Kurs7PM.Клиент
     public partial class Store : Window
     {
         Kurs7DataSet DataSet = new Kurs7DataSet();
-        ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
+        ShoppingCartsTableAdapter STA = new ShoppingCartsTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public Store()
         {
             InitializeComponent();
-            STA.Fill(DataSet.ShoppingCart);
+            STA.Fill(DataSet.ShoppingCarts);
 
 
             string Sql = "select * from dbo.Branch";
@@ -104,7 +104,7 @@ namespace Kurs7PM.Клиент
             }
 
             //Проверка на уже существующие записи
-            string Sql3 = "select * from dbo.ShoppingCart";
+            string Sql3 = "select * from dbo.ShoppingCarts";
             SqlConnection connection3 = new SqlConnection(Kurs7ConnectionString);
             connection3.Open();
             SqlCommand command3 = new SqlCommand(Sql3, connection3);
@@ -127,7 +127,7 @@ namespace Kurs7PM.Клиент
 
             string quantitycompany = "";
             string podchet = "";
-            string Sql6 = "select * from dbo.ShoppingCart" + " WHERE Название =" + "'" + names[index] + "';";
+            string Sql6 = "select * from dbo.ShoppingCarts" + " WHERE Название =" + "'" + names[index] + "';";
             SqlConnection connection6 = new SqlConnection(Kurs7ConnectionString);
             connection6.Open();
             SqlCommand command6 = new SqlCommand(Sql6, connection6);
@@ -147,7 +147,7 @@ namespace Kurs7PM.Клиент
                 int pod = Int32.Parse(podchet.ToString());
                 int podind = Int32.Parse(price[index].ToString());
                 pod += podind;
-                string Sql1 = "UPDATE dbo.ShoppingCart" + " SET Количество = " + quan + ", Цена = " + pod + " WHERE Название=" + "'" + names[index] + "';";
+                string Sql1 = "UPDATE dbo.ShoppingCarts" + " SET Количество = " + quan + ", Цена = " + pod + " WHERE Название=" + "'" + names[index] + "';";
                 SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
                 connection1.Open();
                 SqlCommand command1 = new SqlCommand();
@@ -158,7 +158,7 @@ namespace Kurs7PM.Клиент
             }
             else if (temp == 2)
             {
-                string Sql5 = "INSERT INTO dbo.ShoppingCart" + " (Название, Количество, Цена)" + " VALUES (" + "'" + names[index] + "'" + ", " + 1 + ", " + price[index] + ");";
+                string Sql5 = "INSERT INTO dbo.ShoppingCarts" + " (Название, Количество, Цена)" + " VALUES (" + "'" + names[index] + "'" + ", " + 1 + ", " + price[index] + ");";
                 SqlConnection connection5 = new SqlConnection(Kurs7ConnectionString);
                 connection5.Open();
                 SqlCommand command5 = new SqlCommand();

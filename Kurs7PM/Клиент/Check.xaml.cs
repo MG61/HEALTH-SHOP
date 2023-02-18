@@ -24,14 +24,14 @@ namespace Kurs7PM.Клиент
     {
 
         Kurs7DataSet DataSet = new Kurs7DataSet();
-        ShoppingCartTableAdapter STA = new ShoppingCartTableAdapter();
+        ShoppingCartsTableAdapter STA = new ShoppingCartsTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public Check()
         {
             InitializeComponent();
-            data.ItemsSource = DataSet.ShoppingCart.DefaultView;
-            STA.Fill(DataSet.ShoppingCart);
+            data.ItemsSource = DataSet.ShoppingCarts.DefaultView;
+            STA.Fill(DataSet.ShoppingCarts);
 
             //Подсчёт суммы
             int sum = 0;
@@ -59,7 +59,7 @@ namespace Kurs7PM.Клиент
             SqlDataReader reader = command.ExecuteReader();
             reader.Close();
             connection.Close();
-            STA.Fill(DataSet.ShoppingCart);
+            STA.Fill(DataSet.ShoppingCarts);
 
             Store go = new Store();
             go.Show();
@@ -152,7 +152,7 @@ namespace Kurs7PM.Клиент
             SqlDataReader reader1 = command1.ExecuteReader();
             reader1.Close();
             connection1.Close();
-            STA.Fill(DataSet.ShoppingCart);
+            STA.Fill(DataSet.ShoppingCarts);
 
             //Подсчёт суммы
             int sum = 0;

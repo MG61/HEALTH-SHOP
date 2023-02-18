@@ -35,7 +35,7 @@ namespace Kurs7PM.Авторизация
         Kurs7DataSet DataSet = new Kurs7DataSet();
         AdministratorTableAdapter ATA = new AdministratorTableAdapter();
         EmployeeTableAdapter ETA = new EmployeeTableAdapter();
-        ProviderTableAdapter PTA = new ProviderTableAdapter();
+        ProvidersTableAdapter PTA = new ProvidersTableAdapter();
         ClientsTableAdapter CTA = new ClientsTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
@@ -44,7 +44,7 @@ namespace Kurs7PM.Авторизация
             InitializeComponent();
             ATA.Fill(DataSet.Administrator);
             ETA.Fill(DataSet.Employee);
-            PTA.Fill(DataSet.Provider);
+            PTA.Fill(DataSet.Providers);
             CTA.Fill(DataSet.Clients);
 
             if (0 == DataSet.Administrator.Rows.Count)
@@ -171,13 +171,13 @@ namespace Kurs7PM.Авторизация
         {
             try
             {
-                for (int i = 0; i < DataSet.Provider.Rows.Count; i++)
+                for (int i = 0; i < DataSet.Providers.Rows.Count; i++)
                 {
-                    if (custlog == DataSet.Provider.Rows[i][1].ToString() && custpass == DataSet.Provider.Rows[i][2].ToString())
+                    if (custlog == DataSet.Providers.Rows[i][1].ToString() && custpass == DataSet.Providers.Rows[i][2].ToString())
                     {
                         prov = 1;
 
-                        string Sql = "select * from dbo.Provider";
+                        string Sql = "select * from dbo.Providers";
                         SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
                         connection.Open();
                         SqlCommand command = new SqlCommand(Sql, connection);
