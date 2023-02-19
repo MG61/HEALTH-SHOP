@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kurs7PM.Kurs7DataSetTableAdapters;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,12 +15,15 @@ namespace Kurs7PM.Сотрудник
     public partial class Zakup : Window
     {
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
+        Kurs7DataSet DataSet = new Kurs7DataSet();
+        BuxgalteriaTableAdapter BTA = new BuxgalteriaTableAdapter();
 
         public Zakup(string address)
         {
             InitializeComponent();
 
             addressap.Text = address;
+            BTA.Fill(DataSet.Buxgalteria);
 
             string Sql = "select * from dbo.Sklad";
             SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
@@ -114,7 +118,7 @@ namespace Kurs7PM.Сотрудник
             this.WindowState = WindowState.Minimized;
         }
 
-        //Добавление товара в корзину
+        //Добавление товара на склад филиала
         private void Dob_korz(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -238,7 +242,26 @@ namespace Kurs7PM.Сотрудник
             DataSet ds9 = new DataSet();
             command9.Fill(ds9, sklad);
             connection9.Close();
-            data.ItemsSource = ds9.Tables[sklad].DefaultView; ;
+            data.ItemsSource = ds9.Tables[sklad].DefaultView;
+
+            int lastsumm = 0;
+            string Sql = "SELECT * FROM Buxgalteria WHERE ID_bux=(SELECT max(ID_bux) FROM Buxgalteria);";
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
+            connection.Open();
+            SqlCommand command = new SqlCommand(Sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                lastsumm = Int32.Parse(reader["Остаток"].ToString());
+            }
+            reader.Close();
+            connection.Close();
+
+
+            string minus = "-" + price4[index];
+            int ostatok = Int32.Parse(minus) + lastsumm;
+            BTA.InsertQuery(ostatok);
+            BTA.Fill(DataSet.Buxgalteria);
         }
     }
 }

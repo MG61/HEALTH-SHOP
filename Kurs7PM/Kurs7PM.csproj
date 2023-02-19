@@ -53,6 +53,12 @@
     <ApplicationIcon>images\medicinestore.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -107,8 +113,17 @@
     <Compile Include="Администратор\Branch.xaml.cs">
       <DependentUpon>Branch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Администратор\Buxgaltery.xaml.cs">
+      <DependentUpon>Buxgaltery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Администратор\MenuAdministrator.xaml.cs">
       <DependentUpon>MenuAdministrator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Администратор\Provider.xaml.cs">
+      <DependentUpon>Provider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Бухгалтер\Buxgalter.xaml.cs">
+      <DependentUpon>Buxgalter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Клиент\ShoppingCart.xaml.cs">
       <DependentUpon>ShoppingCart.xaml</DependentUpon>
@@ -142,6 +157,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Администратор\Branch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Администратор\Buxgaltery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Администратор\Provider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Бухгалтер\Buxgalter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

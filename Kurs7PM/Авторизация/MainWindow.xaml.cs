@@ -1,6 +1,7 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
 using Kurs7PM.Авторизация.Регистрация;
 using Kurs7PM.Администратор;
+using Kurs7PM.Бухгалтер;
 using Kurs7PM.Клиент;
 using Kurs7PM.Сотрудник;
 using System;
@@ -23,6 +24,7 @@ namespace Kurs7PM.Авторизация
         EmployeeTableAdapter ETA = new EmployeeTableAdapter();
         ProvidersTableAdapter PTA = new ProvidersTableAdapter();
         ClientsTableAdapter CTA = new ClientsTableAdapter();
+        BuxgalterTableAdapter BTA = new BuxgalterTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public MainWindow()
@@ -32,7 +34,7 @@ namespace Kurs7PM.Авторизация
             ETA.Fill(DataSet.Employee);
             PTA.Fill(DataSet.Providers);
             CTA.Fill(DataSet.Clients);
-
+            BTA.Fill(DataSet.Buxgalter);
             if (0 == DataSet.Administrator.Rows.Count)
             {
                 ATA.InsertQuery("Admin", "Admin", "Тестер", "Тестер", "Тестер");
@@ -79,6 +81,7 @@ namespace Kurs7PM.Авторизация
             EmployeeAuth(log, pass);
             ProviderAuth(log, pass);
             ClientAuth(log, pass);
+            BuxAuth(log, pass);
         }
 
         int nepov = 0;
@@ -202,6 +205,31 @@ namespace Kurs7PM.Авторизация
                     {
                         prov = 1;
                         Store da1 = new Store();
+                        da1.Show();
+                        this.Close();
+                    }
+                    else if (prov == 0)
+                    {
+                        MessageBox.Show("Введите данные!");
+                    }
+                }
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void BuxAuth(string custlog, string custpass)
+        {
+            try
+            {
+                for (int i = 0; i < DataSet.Buxgalter.Rows.Count; i++)
+                {
+                    if (custlog == DataSet.Buxgalter.Rows[i][1].ToString() && custpass == DataSet.Buxgalter.Rows[i][2].ToString())
+                    {
+                        prov = 1;
+                        Buxgalter da1 = new Buxgalter();
                         da1.Show();
                         this.Close();
                     }

@@ -13,6 +13,7 @@ namespace Kurs7PM.Клиент
     {
 
         Kurs7DataSet DataSet = new Kurs7DataSet();
+        BuxgalteriaTableAdapter BTA = new BuxgalteriaTableAdapter();
         ShoppingCartsTableAdapter STA = new ShoppingCartsTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
@@ -21,6 +22,7 @@ namespace Kurs7PM.Клиент
             InitializeComponent();
             data.ItemsSource = DataSet.ShoppingCarts.DefaultView;
             STA.Fill(DataSet.ShoppingCarts);
+            BTA.Fill(DataSet.Buxgalteria);
 
             //Подсчёт суммы
             int sum = 0;
@@ -29,26 +31,36 @@ namespace Kurs7PM.Клиент
                 sum += Int32.Parse(row["Цена"].ToString());
             }
             summ.Text = sum.ToString();
+
+
+            int lastsumm = 0;
+            string Sql = "SELECT * FROM Buxgalteria WHERE ID_bux=(SELECT max(ID_bux) FROM Buxgalteria);";
+            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
+            connection.Open();
+            SqlCommand command = new SqlCommand(Sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                lastsumm = Int32.Parse(reader["Остаток"].ToString());
+            }
+            reader.Close();
+            connection.Close();
+
+            int ostatok = Int32.Parse(summ.Text.ToString()) + lastsumm;
+            BTA.InsertQuery(ostatok);
+            BTA.Fill(DataSet.Buxgalteria);
         }
 
         //Переход к окну магазина
         private void authorization(object sender, RoutedEventArgs e)
         {
-            string Sql1 = "Truncate table dbo.ShoppingCart";
+            string Sql1 = "Truncate table dbo.ShoppingCarts";
             SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
             connection1.Open();
             SqlCommand command1 = new SqlCommand(Sql1, connection1);
             SqlDataReader reader1 = command1.ExecuteReader();
             reader1.Close();
             connection1.Close();
-            string Sql = "Truncate table dbo.ShoppingCartHelp";
-            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
-            connection.Open();
-            SqlCommand command = new SqlCommand(Sql, connection);
-            SqlDataReader reader = command.ExecuteReader();
-            reader.Close();
-            connection.Close();
-            STA.Fill(DataSet.ShoppingCarts);
 
             Store go = new Store();
             go.Show();

@@ -1,4 +1,5 @@
 ﻿using Kurs7PM.Авторизация;
+using Kurs7PM.Бухгалтер;
 using System.Windows;
 using System.Windows.Input;
 
@@ -75,6 +76,20 @@ namespace Kurs7PM.Администратор
         private void admins(object sender, RoutedEventArgs e)
         {
             Administrator go = new Administrator();
+            go.Show();
+            Close();
+        }
+
+        private void Buxgalter(object sender, RoutedEventArgs e)
+        {
+            Buxgaltery go = new Buxgaltery();
+            go.Show();
+            Close();
+        }
+
+        private void Provider(object sender, RoutedEventArgs e)
+        {
+            Provider go = new Provider();
             go.Show();
             Close();
         }
