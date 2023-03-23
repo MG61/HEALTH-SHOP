@@ -95,6 +95,7 @@
     <Compile Include="API\Models\Client.cs" />
     <Compile Include="API\Models\Provider.cs" />
     <Compile Include="API\Models\ShoppingCart.cs" />
+    <Compile Include="API\Models\ShoppingCartEmployee.cs" />
     <Compile Include="Kurs7DataSet.cs">
       <DependentUpon>Kurs7DataSet.xsd</DependentUpon>
     </Compile>
@@ -134,8 +135,14 @@
     <Compile Include="Поставщик\Provider.xaml.cs">
       <DependentUpon>Provider.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Сотрудник\Check.xaml.cs">
+      <DependentUpon>Check.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Сотрудник\Pharmacy.xaml.cs">
       <DependentUpon>Pharmacy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Сотрудник\Store.xaml.cs">
+      <DependentUpon>Store.xaml</DependentUpon>
     </Compile>
     <Compile Include="Сотрудник\Zakup.xaml.cs">
       <DependentUpon>Zakup.xaml</DependentUpon>
@@ -219,7 +226,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Сотрудник\Check.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Сотрудник\Pharmacy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Сотрудник\Store.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

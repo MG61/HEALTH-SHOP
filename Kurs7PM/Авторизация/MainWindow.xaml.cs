@@ -25,6 +25,7 @@ namespace Kurs7PM.Авторизация
         ProvidersTableAdapter PTA = new ProvidersTableAdapter();
         ClientsTableAdapter CTA = new ClientsTableAdapter();
         BuxgalterTableAdapter BTA = new BuxgalterTableAdapter();
+        BuxgalteriaTableAdapter BTAB = new BuxgalteriaTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public MainWindow()
@@ -39,6 +40,11 @@ namespace Kurs7PM.Авторизация
             {
                 ATA.InsertQuery("Admin", "Admin", "Тестер", "Тестер", "Тестер");
                 ATA.Fill(DataSet.Administrator);
+            }
+            if (0 == DataSet.Buxgalteria.Rows.Count)
+            {
+                BTAB.InsertQuery(100000);
+                BTAB.Fill(DataSet.Buxgalteria);
             }
         }
 
@@ -204,7 +210,7 @@ namespace Kurs7PM.Авторизация
                     if (custlog == DataSet.Clients.Rows[i][1].ToString() && custpass == DataSet.Clients.Rows[i][2].ToString())
                     {
                         prov = 1;
-                        Store da1 = new Store();
+                        Клиент.Store da1 = new Клиент.Store();
                         da1.Show();
                         this.Close();
                     }

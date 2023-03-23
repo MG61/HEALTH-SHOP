@@ -168,7 +168,6 @@ namespace Kurs7PM.Клиент
             int index = Int32.Parse(button.Tag.ToString());
             int pomindex = index + 1;
 
-
             //Переменная с таблицей корзины
             string shop = "dbo.ShoppingCarts";
 
@@ -245,27 +244,10 @@ namespace Kurs7PM.Клиент
             quanminus--;
 
             int pod = Int32.Parse(podchet.ToString()) * quanminus;
-            //string Sql1 = "UPDATE dbo.ShoppingCart" + " SET Количество = " + quanminus + ", Цена = " + pod + " WHERE Название=" + "'" + names3[index] + "';";
-            //SqlConnection connection1 = new SqlConnection(Kurs7ConnectionString);
-            //connection1.Open();
-            //SqlCommand command1 = new SqlCommand();
-            //command1.CommandText = Sql1;
-            //command1.Connection = connection1;
-            //command1.ExecuteNonQuery();
-            //connection1.Close();
-
-
 
             //Если товара нет, то удаляет его
             if (quanminus == 0)
             {
-                //string Sql10 = "DELETE  FROM " + shop + " WHERE Название=" + "'" + names3[index] + "';";
-                //SqlConnection connection10 = new SqlConnection(Kurs7ConnectionString);
-                //connection10.Open();
-                //SqlCommand command10 = new SqlCommand(Sql10, connection10);
-                //SqlDataReader reader10 = command10.ExecuteReader();
-                //reader10.Close();
-                //connection10.Close();
                 Delete(pomindex);
             }
             else if (quanminus > 0)
@@ -284,7 +266,7 @@ namespace Kurs7PM.Клиент
             }
 
             STA.Fill(DataSet.ShoppingCarts);
-
+            
             //Подсчёт суммы
             int sum = 0;
             foreach (DataRowView row in data.ItemsSource)

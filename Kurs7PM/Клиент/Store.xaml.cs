@@ -12,15 +12,11 @@ namespace Kurs7PM.Клиент
 {
     public partial class Store : Window
     {
-        Kurs7DataSet DataSet = new Kurs7DataSet();
-        ShoppingCartsTableAdapter STA = new ShoppingCartsTableAdapter();
         string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
 
         public Store()
         {
             InitializeComponent();
-            STA.Fill(DataSet.ShoppingCarts);
-
 
             string Sql = "select * from dbo.Branch";
             SqlConnection connection = new SqlConnection(Kurs7ConnectionString);

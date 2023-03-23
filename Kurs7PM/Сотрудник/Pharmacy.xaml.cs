@@ -1,5 +1,6 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
 using Kurs7PM.Авторизация;
+using Kurs7PM.Клиент;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
@@ -37,6 +38,14 @@ namespace Kurs7PM.Сотрудник
         private void authorization(object sender, RoutedEventArgs e)
         {
             MainWindow go = new MainWindow();
+            go.Show();
+            Close();
+        }
+
+        //Переход к окну продажи
+        private void Store(object sender, RoutedEventArgs e)
+        {
+            Store go = new Store(addressap.Text);
             go.Show();
             Close();
         }

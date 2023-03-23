@@ -59,5 +59,27 @@ CREATE TABLE [dbo].[Client] (
     CONSTRAINT ID_client PRIMARY KEY CLUSTERED (ID_client ASC)
 );
 
+Create table Buxgalteria(
+	ID_bux int identity(1,1) primary key,
+	Остаток int  NOT NULL
+);
+
+CREATE TABLE [dbo].Buxgalter (
+    [ID_buxgalter] INT IDENTITY (1, 1) NOT NULL,
+    [Логин]            NVARCHAR (50) NOT NULL,
+    [Пароль]           NVARCHAR (50) NOT NULL,
+    [Фамилия]          NVARCHAR (50) NULL,
+    [Имя]              NVARCHAR (50) NULL,
+    [Отчество]         NVARCHAR (50) NULL,
+    CONSTRAINT [ID_buxgalter] PRIMARY KEY CLUSTERED ([ID_buxgalter] ASC)
+);
+
+Create table ShoppingCartEmployee(
+	ID_cart int identity(1,1) primary key,
+	Название nvarchar(50) NOT NULL,
+	Количество int  NOT NULL,
+	Цена int  NOT NULL
+);
+
 Truncate table ShoppingCart
 Truncate table ShoppingCartHelp
