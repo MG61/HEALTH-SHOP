@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -187,9 +188,21 @@ namespace Kurs7PM.Клиент
         //Переход к окну корзины
         private void korzina(object sender, RoutedEventArgs e)
         {
-            ShoppingCart go = new ShoppingCart(sklad);
-            go.Show();
-            Close();
+            var Number = new Regex(@"[0-9]+");
+            var Angl = new Regex(@"[A-Z]+");
+            var MinAngl = new Regex(@"[a-z]+");
+            var Rus = new Regex(@"[А-Я]+");
+            var MinRus = new Regex(@"[а-я]+");
+            var Minsimbols = new Regex(@".{4,50}");
+            var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
+
+            if (!string.IsNullOrWhiteSpace(comboboxsklad.Text))
+            {
+                ShoppingCart go = new ShoppingCart(sklad);
+                go.Show();
+                Close();
+            }
+            else { MessageBox.Show("Выберите аптеку!"); }
         }
 
         //Отправляет корзину в конец datagrid

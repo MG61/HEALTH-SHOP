@@ -4,11 +4,13 @@ using Kurs7PM.Администратор;
 using Kurs7PM.Бухгалтер;
 using Kurs7PM.Клиент;
 using Kurs7PM.Сотрудник;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
@@ -81,13 +83,28 @@ namespace Kurs7PM.Авторизация
 
         private void Voyti_Click(object sender, RoutedEventArgs e)
         {
-            string log = login.Text;
-            string pass = password.Text;
-            AdminAuth(log, pass);
-            EmployeeAuth(log, pass);
-            ProviderAuth(log, pass);
-            ClientAuth(log, pass);
-            BuxAuth(log, pass);
+            var Number = new Regex(@"[0-9]+");
+            var Angl = new Regex(@"[A-Z]+");
+            var MinAngl = new Regex(@"[a-z]+");
+            var Rus = new Regex(@"[А-Я]+");
+            var MinRus = new Regex(@"[а-я]+");
+            var Minsimbols = new Regex(@".{4,50}");
+            var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
+
+            if (!string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(password.Password))
+            {
+                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password) && Effects.IsMatch(password.Password))
+                {
+                    string log = login.Text;
+                    string pass = password.Password;
+                    AdminAuth(log, pass);
+                    EmployeeAuth(log, pass);
+                    ProviderAuth(log, pass);
+                    ClientAuth(log, pass);
+                    BuxAuth(log, pass);
+                }
+            }
+            else { MessageBox.Show("Проверьте правильность введённых данных!"); }
         }
 
         int nepov = 0;

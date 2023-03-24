@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,7 +12,7 @@ namespace Kurs7PM.Авторизация.Регистрация
     {
         HttpClient client = new HttpClient();
         //string Kurs7ConnectionString = Properties.Settings.Default.Kurs7ConnectionString1;
-
+         
         public Client()
         {
             InitializeComponent();
@@ -19,6 +20,7 @@ namespace Kurs7PM.Авторизация.Регистрация
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             GetClient();
+            var hasNumber = new Regex(@"[0-9]+");
         }
 
         //Получение всех данных
@@ -50,28 +52,44 @@ namespace Kurs7PM.Авторизация.Регистрация
         //Добавление клиента
         private void add_Provider(object sender, RoutedEventArgs e)
         {
-            var client = new Kurs7PM.API.Models.Client()
-            {
-                Логин = login.Text,
+            var Number = new Regex(@"[0-9]+");
+            var Angl = new Regex(@"[A-Z]+");
+            var MinAngl = new Regex(@"[a-z]+");
+            var Rus = new Regex(@"[А-Я]+");
+            var MinRus = new Regex(@"[а-я]+");
+            var Minsimbols = new Regex(@".{4,50}");
+            var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
 
-                Пароль = password.Text,
+            if (!string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(password.Password) && !string.IsNullOrWhiteSpace(familia.Text) && !string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(middle_name.Text)) {
+                if(Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password) && Effects.IsMatch(password.Password))
+                {
+                    var client = new Kurs7PM.API.Models.Client()
+                    {
+                        Логин = login.Text,
 
-                Фамилия = familia.Text,
+                        Пароль = password.Password,
 
-                Имя = name.Text,
+                        Фамилия = familia.Text,
 
-                Отчество = middle_name.Text
-            };
+                        Имя = name.Text,
 
-            login.Text = "";
-            password.Text = "";
-            familia.Text = "";
-            name.Text = "";
-            middle_name.Text = "";
+                        Отчество = middle_name.Text
+                    };
 
-            this.SaveClient(client);
+                    login.Text = "";
+                    password.Password = "";
+                    familia.Text = "";
+                    name.Text = "";
+                    middle_name.Text = "";
+
+                    this.SaveClient(client);
+                    MessageBox.Show("Вы успешно зарегистрированы!");
+                }
+            }
+            else {MessageBox.Show("Проверьте правильность введённых данных!"); }
+
             GetClient();
-            MessageBox.Show("Вы успешно зарегистрированы!");
+            
         }
 
         //Переход к меню

@@ -1,10 +1,12 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
+using Microsoft.Office.Interop.Excel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -340,9 +342,21 @@ namespace Kurs7PM.Клиент
         //Переход к чеку
         private void oplata(object sender, RoutedEventArgs e)
         {
-            Check go = new Check();
-            go.Show();
-            Close();
+            var Number = new Regex(@"[0-9]+");
+            var Angl = new Regex(@"[A-Z]+");
+            var MinAngl = new Regex(@"[a-z]+");
+            var Rus = new Regex(@"[А-Я]+");
+            var MinRus = new Regex(@"[а-я]+");
+            var Minsimbols = new Regex(@".{4,50}");
+            var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
+
+            if (!string.IsNullOrWhiteSpace(name_card.Text) && !string.IsNullOrWhiteSpace(date_card.Text) && !string.IsNullOrWhiteSpace(CVV_card.Text))
+            {
+                    Check go = new Check();
+                    go.Show();
+                    Close();
+            }
+            else { MessageBox.Show("Проверьте правильность введённых данных!"); }
         }
 
         //Позволяет перетаскивать окно

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -95,8 +96,23 @@ namespace Kurs7PM.Администратор
         //Добавление сотрудника
         private void add_employee(object sender, RoutedEventArgs e)
         {
-            BTA.InsertQuery(login.Text, password.Text, familia.Text, name.Text, middle_name.Text);
-            BTA.Fill(DataSet.Buxgalter);
+            var Number = new Regex(@"[0-9]+");
+            var Angl = new Regex(@"[A-Z]+");
+            var MinAngl = new Regex(@"[a-z]+");
+            var Rus = new Regex(@"[А-Я]+");
+            var MinRus = new Regex(@"[а-я]+");
+            var Minsimbols = new Regex(@".{4,50}");
+            var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
+
+            if (!string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(password.Password) && !string.IsNullOrWhiteSpace(familia.Text) && !string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(middle_name.Text))
+            {
+                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password) && Effects.IsMatch(password.Password))
+                {
+                    BTA.InsertQuery(login.Text, password.Password, familia.Text, name.Text, middle_name.Text);
+                    BTA.Fill(DataSet.Buxgalter);
+                }
+            }
+            else { MessageBox.Show("Проверьте правильность введённых данных!"); }
         }
 
         //Удаляет запись выбранной ячейки

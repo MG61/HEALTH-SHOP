@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Kurs7PM.API.Models
 {
-    public class ClassHash
+    public class TestVaid
     {
         public bool ValidatePassword(string password, out string ErrorMessage)
         {

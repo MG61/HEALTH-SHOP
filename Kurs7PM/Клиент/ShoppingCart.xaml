@@ -105,7 +105,7 @@
                 <TextBlock Text="Данные карты" FontSize="24" FontWeight="SemiBold" Margin="0 0 0 70" Foreground="LightGreen"/>
 
                 <TextBlock Text="Номер карты" Foreground="white" FontSize="16"/>
-                <TextBox Margin="0 5 0 30"/>
+                <TextBox Margin="0 5 0 30" Name="name_card"/>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -116,11 +116,11 @@
 
                     <StackPanel>
                         <TextBlock Text="Дата" Foreground="white" FontSize="16"/>
-                        <TextBox Margin="0 5 0 30"/>
+                        <TextBox Margin="0 5 0 30" Name="date_card"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="30 0 0 0" Width="50">
                         <TextBlock Text="CVV" Foreground="white" FontSize="16"/>
-                        <TextBox Margin="0 5 0 30"/>
+                        <TextBox Margin="0 5 0 30" Name="CVV_card"/>
                     </StackPanel>
 
                 </Grid>

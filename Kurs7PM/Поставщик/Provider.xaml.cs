@@ -3,6 +3,7 @@ using Kurs7PM.Авторизация;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -129,7 +130,17 @@ namespace Kurs7PM.Поставщик
 
         private void add_sklad(object sender, RoutedEventArgs e)
         {
-            string Sql = "INSERT INTO " + allsklad + " (Название, Количество, Цена)" + " VALUES (" + "'" + name.Text + "'" + ", " + quantity.Text + ", " + price.Text + ");";
+            var Number = new Regex(@"[0-9]+");
+            var Angl = new Regex(@"[A-Z]+");
+            var MinAngl = new Regex(@"[a-z]+");
+            var Rus = new Regex(@"[А-Я]+");
+            var MinRus = new Regex(@"[а-я]+");
+            var Minsimbols = new Regex(@".{4,50}");
+            var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
+
+            if (!string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(quantity.Text) && !string.IsNullOrWhiteSpace(price.Text))
+            {
+                    string Sql = "INSERT INTO " + allsklad + " (Название, Количество, Цена)" + " VALUES (" + "'" + name.Text + "'" + ", " + quantity.Text + ", " + price.Text + ");";
             SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
             connection.Open();
             SqlCommand command = new SqlCommand();
@@ -147,6 +158,9 @@ namespace Kurs7PM.Поставщик
             connection1.Close();
 
             data.ItemsSource = ds1.Tables[allsklad].DefaultView; ;
+                
+            }
+            else { MessageBox.Show("Проверьте правильность введённых данных!"); }
         }
     }
 }

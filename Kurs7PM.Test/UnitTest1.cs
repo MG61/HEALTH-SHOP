@@ -16,11 +16,11 @@ namespace Kurs7PM.Test
         [Test]
         public void TestValidationPassword()
         {
-            ClassHash classHash = new ClassHash();
+            TestVaid testVaid = new TestVaid();
 
-            string Password = "Vladsapsan228";
+            string Password = "Ironman15#";
 
-            Assert.That(classHash.ValidatePassword(Password, out Password), Is.EqualTo(true));
+            Assert.That(testVaid.ValidatePassword(Password, out Password), Is.EqualTo(true));
         }
     }
 }

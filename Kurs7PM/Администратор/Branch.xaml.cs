@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -122,17 +123,36 @@ namespace Kurs7PM.Администратор
         //Добавление сотрудника
         private void add_branch(object sender, RoutedEventArgs e)
         {
-            BTA.InsertQuery(filials.Text);
-            BTA.Fill(DataSet.Branch);
+            var Number = new Regex(@"[0-9]+");
+            var Angl = new Regex(@"[A-Z]+");
+            var MinAngl = new Regex(@"[a-z]+");
+            var Rus = new Regex(@"[А-Я]+");
+            var MinRus = new Regex(@"[а-я]+");
+            var Minsimbols = new Regex(@".{4,50}");
+            var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
 
-            string priem = filials.Text;
-            string Sql = "CREATE TABLE " + priem + "(\tID_medication int identity(1,1) primary key,\r\n\tНазвание nvarchar(50) NOT NULL,\r\n\tКоличество int  NOT NULL,\r\n\tЦена int  NOT NULL);";
-            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
-            connection.Open();
-            SqlCommand command = new SqlCommand(Sql, connection);
-            SqlDataReader reader = command.ExecuteReader();
-            reader.Close();
-            connection.Close();
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(filials.Text))
+                {
+                    if (Rus.IsMatch(filials.Text) && MinRus.IsMatch(filials.Text))
+                    {
+                        BTA.InsertQuery(filials.Text);
+                        BTA.Fill(DataSet.Branch);
+
+                        string priem = filials.Text;
+                        string Sql = "CREATE TABLE " + priem + "(\tID_medication int identity(1,1) primary key,\r\n\tНазвание nvarchar(50) NOT NULL,\r\n\tКоличество int  NOT NULL,\r\n\tЦена int  NOT NULL);";
+                        SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(Sql, connection);
+                        SqlDataReader reader = command.ExecuteReader();
+                        reader.Close();
+                        connection.Close();
+                    }
+                }
+                else { MessageBox.Show("Проверьте правильность введённых данных!"); }
+            }
+            catch { MessageBox.Show("Проверьте, чтобы при вводе склада, не было пробелов!"); };
         }
 
         //Переход к сотрудникам

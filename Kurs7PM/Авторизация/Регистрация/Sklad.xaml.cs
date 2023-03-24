@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -109,22 +110,41 @@ namespace Kurs7PM.Авторизация.Регистрация
         //Добавление
         private void add_branch(object sender, RoutedEventArgs e)
         {
-            STA.InsertQuery(filials.Text);
-            STA.Fill(DataSet.Sklad);
+            var Number = new Regex(@"[0-9]+");
+            var Angl = new Regex(@"[A-Z]+");
+            var MinAngl = new Regex(@"[a-z]+");
+            var Rus = new Regex(@"[А-Я]+");
+            var MinRus = new Regex(@"[а-я]+");
+            var Minsimbols = new Regex(@".{4,50}");
+            var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
 
-            string priem = filials.Text;
-            string Sql = "CREATE TABLE " + priem + "(\tID_providersklad int identity(1,1) primary key,\r\n\tНазвание nvarchar(50) NOT NULL,\r\n\tКоличество int  NOT NULL,\r\n\tЦена int  NOT NULL);";
-            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
-            connection.Open();
-            SqlCommand command = new SqlCommand(Sql, connection);
-            SqlDataReader reader = command.ExecuteReader();
-            reader.Close();
-            connection.Close();
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(filials.Text))
+                {
+                    if (Rus.IsMatch(filials.Text) && MinRus.IsMatch(filials.Text))
+                    {
+                        STA.InsertQuery(filials.Text);
+                        STA.Fill(DataSet.Sklad);
 
-            MessageBox.Show("Вы успешно создали склад!");
-            Авторизация.Регистрация.Provider go = new Авторизация.Регистрация.Provider(priem);
-            go.Show();
-            Close();
+                        string priem = filials.Text;
+                        string Sql = "CREATE TABLE " + priem + "(\tID_providersklad int identity(1,1) primary key,\r\n\tНазвание nvarchar(50) NOT NULL,\r\n\tКоличество int  NOT NULL,\r\n\tЦена int  NOT NULL);";
+                        SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(Sql, connection);
+                        SqlDataReader reader = command.ExecuteReader();
+                        reader.Close();
+                        connection.Close();
+
+                        MessageBox.Show("Вы успешно создали склад!");
+                        Авторизация.Регистрация.Provider go = new Авторизация.Регистрация.Provider(priem);
+                        go.Show();
+                        Close();
+                    }
+                }
+                else { MessageBox.Show("Проверьте правильность введённых данных!"); }
+            }
+            catch { MessageBox.Show("Проверьте, чтобы при вводе филиала, не было пробелов!"); };
         }
 
         //Переход

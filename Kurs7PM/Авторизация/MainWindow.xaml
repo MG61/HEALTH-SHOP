@@ -77,7 +77,7 @@
                 <TextBlock Text="Логин" Foreground="white" FontSize="16" Margin="0 20 0 5"/>
                 <TextBox Margin="0 5 0 5" Name="login"/>
                 <TextBlock Text="Пароль" Foreground="white" FontSize="16" Margin="0 10 0 0"/>
-                <TextBox Margin="0 0 0 5" Name="password"/>
+                <PasswordBox Margin="0 0 0 5" Name="password"/>
                 <Button Margin="0 10 0 0" Style="{StaticResource buttonBack}" Foreground="white" FontSize="12" Click="clientreg" >
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Нет аккаунта? Создай здесь ->"/>

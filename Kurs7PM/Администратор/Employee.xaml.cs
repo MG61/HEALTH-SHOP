@@ -1,8 +1,10 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
+using Kurs7PM.Авторизация.Регистрация;
 using System;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -124,8 +126,23 @@ namespace Kurs7PM.Администратор
         //Добавление сотрудника
         private void add_employee(object sender, RoutedEventArgs e)
         {
-            ETA.InsertQuery(login.Text, GetHash(password.Text), familia.Text, name.Text, middle_name.Text, filial.Text);
-            ETA.Fill(DataSet.Employee);
+            var Number = new Regex(@"[0-9]+");
+            var Angl = new Regex(@"[A-Z]+");
+            var MinAngl = new Regex(@"[a-z]+");
+            var Rus = new Regex(@"[А-Я]+");
+            var MinRus = new Regex(@"[а-я]+");
+            var Minsimbols = new Regex(@".{4,50}");
+            var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
+
+            if (!string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(password.Password) && !string.IsNullOrWhiteSpace(familia.Text) && !string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(middle_name.Text) && !string.IsNullOrWhiteSpace(filial.Text))
+            {
+                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password) && Effects.IsMatch(password.Password))
+                {
+                    ETA.InsertQuery(login.Text, GetHash(password.Password), familia.Text, name.Text, middle_name.Text, filial.Text);
+                    ETA.Fill(DataSet.Employee);
+                }
+            }
+            else { MessageBox.Show("Проверьте правильность введённых данных!"); }
         }
 
         //Переход к филиалам

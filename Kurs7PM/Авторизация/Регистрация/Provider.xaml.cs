@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
@@ -92,30 +93,46 @@ namespace Kurs7PM.Авторизация.Регистрация
         //Добавление поставщика
         private void add_Provider(object sender, RoutedEventArgs e)
         {
-            var provider = new Kurs7PM.API.Models.Provider()
+            var Number = new Regex(@"[0-9]+");
+            var Angl = new Regex(@"[A-Z]+");
+            var MinAngl = new Regex(@"[a-z]+");
+            var Rus = new Regex(@"[А-Я]+");
+            var MinRus = new Regex(@"[а-я]+");
+            var Minsimbols = new Regex(@".{4,50}");
+            var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
+
+            if (!string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(password.Password) && !string.IsNullOrWhiteSpace(familia.Text) && !string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(middle_name.Text) && !string.IsNullOrWhiteSpace(sklad.Text))
             {
-                Логин = login.Text,
+                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password) && Effects.IsMatch(password.Password)) {
+                    var provider = new Kurs7PM.API.Models.Provider()
+                    {
+                        Логин = login.Text,
 
-                Пароль = password.Text,
+                        Пароль = password.Password,
 
-                Фамилия = familia.Text,
+                        Фамилия = familia.Text,
 
-                Имя = name.Text,
+                        Имя = name.Text,
 
-                Отчество = middle_name.Text,
+                        Отчество = middle_name.Text,
 
-                Склад = sklad.Text
-            };
+                        Склад = sklad.Text
+                    };
 
-            login.Text = "";
-            password.Text = "";
-            familia.Text = "";
-            name.Text = "";
-            middle_name.Text = "";
-            sklad.Text = "";
-            this.Save(provider);
+                    login.Text = "";
+                    password.Password = "";
+                    familia.Text = "";
+                    name.Text = "";
+                    middle_name.Text = "";
+                    sklad.Text = "";
+                    this.Save(provider);
+            
+                    MessageBox.Show("Вы успешно зарегистрированы!");
+                }
+            }
+            else { MessageBox.Show("Проверьте правильность введённых данных!"); }
+
             Get();
-            MessageBox.Show("Вы успешно зарегистрированы!");
         }
 
         //Переход
