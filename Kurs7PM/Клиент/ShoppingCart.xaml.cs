@@ -33,7 +33,7 @@ namespace Kurs7PM.Клиент
 
 
             medicine = name_medicine;
-
+                
             //Подсчёт суммы
             int sum = 0;
             foreach (DataRowView row in data.ItemsSource)

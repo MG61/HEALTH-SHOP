@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Kurs7PM.API.Models.Client">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAEAAABAAAAAAAABAAABIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>API\Models\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kurs7PM.API.Models.Provider">
+    <Position X="5.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIABAAAEAAABAAAAAAAABAAABAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>API\Models\Provider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kurs7PM.API.Models.ShoppingCart">
+    <Position X="7.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAgAEAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>API\Models\ShoppingCart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kurs7PM.API.Models.ShoppingCartEmployee">
+    <Position X="4" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAgAEAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>API\Models\ShoppingCartEmployee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kurs7PM.Properties.Resources">
+    <Position X="9.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kurs7PM.Авторизация.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>sAhAEAQAAACAAAAgYgAQgAAAgIAAAAACAAhAAgBA4Ag=</HashCode>
+      <FileName>Авторизация\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Авторизация.Регистрация.Client" BaseTypeListCollapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAgAAAAAAAAAAAAAAEAkBBEBAgAQ=</HashCode>
+      <FileName>Авторизация\Регистрация\Client.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Авторизация.Регистрация.Provider" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAAEAAABgAgAAAAAAAAEAAAAAEAgABEAAgAA=</HashCode>
+      <FileName>Авторизация\Регистрация\Provider.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Авторизация.Регистрация.Sklad" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAgAAAAAAAgAgIAAAAAAIAAAIAQAAgAAgAAoAA=</HashCode>
+      <FileName>Авторизация\Регистрация\Sklad.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Администратор.Administrator" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAIAAAAAAAAAAAgAgAIAAgAAIAAgIAQAAgAAgAAgAA=</HashCode>
+      <FileName>Администратор\Administrator.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Администратор.Branch" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAIAAAgAAAAAAAgAgAIAAgAAIAAAIAQAAgAAgAAgAA=</HashCode>
+      <FileName>Администратор\Branch.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Администратор.Buxgaltery" BaseTypeListCollapsed="true">
+    <Position X="11" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAIAAAACAAAAAAgAgAAAAgAAIAAAIAQAAgAAgAAgAA=</HashCode>
+      <FileName>Администратор\Buxgaltery.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Администратор.Employee" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAgIAAAACAAAAAAgAgAAAAgACIAAAIASAAgAAgAAgAA=</HashCode>
+      <FileName>Администратор\Employee.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Администратор.MenuAdministrator" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAgAgAIAAAAAAEAAAAEAAgAASAAgAA=</HashCode>
+      <FileName>Администратор\MenuAdministrator.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Администратор.Provider" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAgAgAAAAgAAIAAAIAQAAgAAgAA4AA=</HashCode>
+      <FileName>Администратор\Provider.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Бухгалтер.Buxgalter" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAgAAAAAAAgAgAAAAgAAIAAAAgAAAgAAgAAgAA=</HashCode>
+      <FileName>Бухгалтер\Buxgalter.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Клиент.Check" BaseTypeListCollapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAgAgAAACAAAIQAAIEAAAgAAgAAoAA=</HashCode>
+      <FileName>Клиент\Check.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Клиент.ShoppingCart" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAAAAASAAAAAgAgAAAAAAAIEAAIARAAgABgBAoEA=</HashCode>
+      <FileName>Клиент\ShoppingCart.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Клиент.Store" BaseTypeListCollapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIABAAAAAAAgAgAgAAACAgAIAAAIAAAAgAEAAAgAA=</HashCode>
+      <FileName>Клиент\Store.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Поставщик.Provider" BaseTypeListCollapsed="true">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAIAAAAAAAABAAgAgAAACAAAIAAAIAQAAgAAgAAoAA=</HashCode>
+      <FileName>Поставщик\Provider.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Сотрудник.Check" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAIAAAAAAAAAAAoAgAAACAAAIQAAIEAAAgAAgAAoAA=</HashCode>
+      <FileName>Сотрудник\Check.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Сотрудник.Pharmacy" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAgAAgCAAAIAAAIAAAAgAAwAAoAA=</HashCode>
+      <FileName>Сотрудник\Pharmacy.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Сотрудник.Store" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAAAAASAAAAAoAgAAAAAgAIEAAIARAAgABABAgAA=</HashCode>
+      <FileName>Сотрудник\Store.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Kurs7PM.Сотрудник.Zakup" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAIABAAAAAAAgAgAgAAACAgAIAAAIAAAAgAAgAAgAA=</HashCode>
+      <FileName>Сотрудник\Zakup.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

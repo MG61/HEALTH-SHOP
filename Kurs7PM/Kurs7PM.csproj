@@ -92,6 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="API\Models\ClassHash.cs" />
     <Compile Include="API\Models\Client.cs" />
     <Compile Include="API\Models\Provider.cs" />
     <Compile Include="API\Models\ShoppingCart.cs" />
@@ -261,6 +262,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Kurs7DataSet.xsc">
       <DependentUpon>Kurs7DataSet.xsd</DependentUpon>
     </None>

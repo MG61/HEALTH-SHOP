@@ -136,6 +136,4 @@ namespace Kurs7PM.Администратор
             Close();
         }
     }
-
-
 }
