@@ -4,7 +4,6 @@ using Kurs7PM.Администратор;
 using Kurs7PM.Бухгалтер;
 using Kurs7PM.Клиент;
 using Kurs7PM.Сотрудник;
-using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -93,7 +92,7 @@ namespace Kurs7PM.Авторизация
 
             if (!string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(password.Password))
             {
-                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password) && Effects.IsMatch(password.Password))
+                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password))
                 {
                     string log = login.Text;
                     string pass = password.Password;

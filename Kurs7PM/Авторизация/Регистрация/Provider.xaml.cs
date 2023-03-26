@@ -101,9 +101,9 @@ namespace Kurs7PM.Авторизация.Регистрация
             var Minsimbols = new Regex(@".{4,50}");
             var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
 
-            if (!string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(password.Password) && !string.IsNullOrWhiteSpace(familia.Text) && !string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(middle_name.Text) && !string.IsNullOrWhiteSpace(sklad.Text))
+            if (!string.IsNullOrWhiteSpace(login.Text) )
             {
-                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password) && Effects.IsMatch(password.Password)) {
+                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password)) {
                     var provider = new Kurs7PM.API.Models.Provider()
                     {
                         Логин = login.Text,

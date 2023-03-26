@@ -136,7 +136,7 @@ namespace Kurs7PM.Администратор
 
             if (!string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(password.Password) && !string.IsNullOrWhiteSpace(familia.Text) && !string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(middle_name.Text) && !string.IsNullOrWhiteSpace(filial.Text))
             {
-                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password) && Effects.IsMatch(password.Password))
+                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password))
                 {
                     ETA.InsertQuery(login.Text, GetHash(password.Password), familia.Text, name.Text, middle_name.Text, filial.Text);
                     ETA.Fill(DataSet.Employee);

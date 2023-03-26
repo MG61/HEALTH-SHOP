@@ -60,8 +60,9 @@ namespace Kurs7PM.Авторизация.Регистрация
             var Minsimbols = new Regex(@".{4,50}");
             var Effects = new Regex(@"[!@#$%^&*()_+=[{]};:<>|./?,-]");
 
+            MessageBox.Show(password.Password);
             if (!string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(password.Password) && !string.IsNullOrWhiteSpace(familia.Text) && !string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(middle_name.Text)) {
-                if(Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password) && Effects.IsMatch(password.Password))
+                if(Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Number.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password))
                 {
                     var client = new Kurs7PM.API.Models.Client()
                     {
@@ -85,6 +86,7 @@ namespace Kurs7PM.Авторизация.Регистрация
                     this.SaveClient(client);
                     MessageBox.Show("Вы успешно зарегистрированы!");
                 }
+                else { MessageBox.Show("Проверьте правильность введённого пароля!"); }
             }
             else {MessageBox.Show("Проверьте правильность введённых данных!"); }
 

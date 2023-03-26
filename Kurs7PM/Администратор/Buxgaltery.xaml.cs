@@ -106,11 +106,12 @@ namespace Kurs7PM.Администратор
 
             if (!string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(password.Password) && !string.IsNullOrWhiteSpace(familia.Text) && !string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(middle_name.Text))
             {
-                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password) && Effects.IsMatch(password.Password))
+                if (Angl.IsMatch(password.Password) && MinAngl.IsMatch(password.Password) && Minsimbols.IsMatch(password.Password))
                 {
                     BTA.InsertQuery(login.Text, password.Password, familia.Text, name.Text, middle_name.Text);
                     BTA.Fill(DataSet.Buxgalter);
                 }
+                else { MessageBox.Show("Введите корректный пароль!"); }
             }
             else { MessageBox.Show("Проверьте правильность введённых данных!"); }
         }

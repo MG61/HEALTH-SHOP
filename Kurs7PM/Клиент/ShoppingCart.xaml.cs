@@ -1,5 +1,4 @@
 ﻿using Kurs7PM.Kurs7DataSetTableAdapters;
-using Microsoft.Office.Interop.Excel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

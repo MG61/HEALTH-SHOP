@@ -9,10 +9,9 @@ namespace Kurs7PM.API.Models
 {
     public class TestVaid
     {
-        public bool ValidatePassword(string password, out string ErrorMessage)
+        public bool ValidatePassword(string password)
         {
             var input = password;
-            ErrorMessage = string.Empty;
 
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -27,25 +26,20 @@ namespace Kurs7PM.API.Models
 
             if (!hasLowerChar.IsMatch(input))
             {
-                ErrorMessage = "Пароль должен содержать по крайней мере один символ нижнего регистра";
                 return false;
             }
             else if (!hasUpperChar.IsMatch(input))
             {
-                ErrorMessage = "Пароль должен содержать по крайней мере один символ верхнего регистра";
                 return false;
             }
             else if (!hasMiniMaxChars.IsMatch(input))
             {
-                ErrorMessage = "Пароль должен быть не меньше 8 и не больше 15 символов";
                 return false;
             }
             else if (!hasNumber.IsMatch(input))
             {
-                ErrorMessage = "Пароль должен содержать по крайней мере одну цифру";
                 return false;
             }
-
             else
             {
                 return true;

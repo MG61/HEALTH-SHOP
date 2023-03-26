@@ -2,7 +2,6 @@
 using Kurs7PM.Администратор;
 using LiveCharts;
 using LiveCharts.Wpf;
-using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -125,7 +124,7 @@ namespace Kurs7PM.Бухгалтер
 
             if (!string.IsNullOrWhiteSpace(ostatok.ToString()))
             {
-                if (Number.IsMatch(ostatok.ToString()) || Number.IsMatch(ostatok.ToString()) && Effects.IsMatch(ostatok.ToString()))
+                if (Number.IsMatch(ostatok.ToString()) || Number.IsMatch(ostatok.ToString()))
                 {
                     BTA.InsertQuery(ostatok);
                     BTA.Fill(DataSet.Buxgalteria);

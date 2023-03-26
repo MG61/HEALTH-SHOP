@@ -141,9 +141,9 @@ namespace Kurs7PM.Поставщик
             if (!string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(quantity.Text) && !string.IsNullOrWhiteSpace(price.Text))
             {
                     string Sql = "INSERT INTO " + allsklad + " (Название, Количество, Цена)" + " VALUES (" + "'" + name.Text + "'" + ", " + quantity.Text + ", " + price.Text + ");";
-            SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
-            connection.Open();
-            SqlCommand command = new SqlCommand();
+                    SqlConnection connection = new SqlConnection(Kurs7ConnectionString);
+                    connection.Open();
+                    SqlCommand command = new SqlCommand();
             command.CommandText = Sql;
             command.Connection = connection;
             command.ExecuteNonQuery();

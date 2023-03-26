@@ -20,7 +20,7 @@ namespace Kurs7PM.Test
 
             string Password = "Ironman15#";
 
-            Assert.That(testVaid.ValidatePassword(Password, out Password), Is.EqualTo(true));
+            Assert.That(testVaid.ValidatePassword(Password), Is.EqualTo(true));
         }
     }
 }
